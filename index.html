@@ -490,7 +490,7 @@ async function loadClasses(){
 }
 window.copyCode=async c=>{try{await navigator.clipboard.writeText(c);alert('Disalin: '+c);}catch{prompt('Kode:',c);}};
 window.teacherDeleteClass=async id=>{if(!confirm('Hapus?'))return;try{await deleteDoc(doc(db,'classes',id));await loadClasses();}catch(e){alert(errText(e));}};
-  /* ================= MURID ================= */
+    /* ================= MURID ================= */
 
 async function renderStudent(){
   showShell(student.nama+' · Murid · Kelas '+student.kode);
@@ -1129,8 +1129,7 @@ window.pilihMatchOption=(soalIdx,pi,plain,btn)=>{
   wrap.querySelectorAll('.match-opt-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
 };
-
-let draggedItem=null;
+  let draggedItem=null;
 window.mulaiDragKuis=(event,el)=>{
 draggedItem=el;
 el.classList.add('dragging');
@@ -1750,161 +1749,126 @@ modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
 
 modal.querySelector('#simpanNilaiRiwayat').addEventListener('click',async()=>{
 const inputs=modal.querySelectorAll('.skor-uraian-riwayat');
-const perSoal={};
-let total=0;
+const skorPerSoal={};
+let totalUraian=0;
 inputs.forEach(inp=>{
 const i=Number(inp.dataset.i);
-const v=Math.max(0,Math.min(12,Number(inp.value)||0));
-perSoal[i]=v;
-total+=v;
+let val=Number(inp.value)||0;
+if(val<0)val=0;if(val>12)val=12;
+skorPerSoal[i]=val;
+totalUraian+=val;
 });
-const skorMatch=r.skorMatch||0;
-const skorDrag=r.skorDrag||0;
-const skorUraian=total;
-const skorTotal=skorMatch+skorDrag+skorUraian;
 try{
-modal.querySelector('#simpanNilaiRiwayat').disabled=true;
+const skorTotal=Math.round((r.skorMatch||0)+(r.skorDrag||0)+totalUraian);
 await updateDoc(doc(db,'riwayat_soal',riwayatId),{
-skorUraian,skorUraianPerSoal:perSoal,skorTotal,
-skor:skorTotal,
-uraianDinilai:true,
-updatedAt:serverTimestamp()
+skorUraianPerSoal:skorPerSoal,
+skorUraian:totalUraian,
+skorTotal,
+uraianDinilai:true
 });
+const docId=`${kode}_${nama.replace(/\s+/g,'_')}`;
 try{
-const docId=`${r.studentKode}_${r.studentNama.replace(/\s+/g,'_')}`;
-const pDoc=await getDoc(doc(db,'progres_soal',docId));
-if(pDoc.exists()){
-const pData=pDoc.data();
-if(pData.updatedAt && r.at && Math.abs(pData.updatedAt.toDate().getTime()-r.at.toDate().getTime()) < 5000){
-await updateDoc(doc(db,'progres_soal',docId),{
-skorUraian,skorUraianPerSoal:perSoal,skorTotal,
+await setDoc(doc(db,'progres_soal',docId),{
+skorUraianPerSoal:skorPerSoal,
+skorUraian:totalUraian,
+skorTotal,
 uraianDinilai:true,
 updatedAt:serverTimestamp()
-});
-}
-}
-}catch(e2){console.warn('Gagal update progres_soal:',e2);}
+},{merge:true});
+}catch(e){console.warn('Gagal update progres_soal:',e);}
 
-modal.remove();
-
-const detailModal = document.querySelector('.modal.show');
-if(detailModal) detailModal.remove();
-
-const docId = `${r.studentKode}_${r.studentNama.replace(/\s+/g,'_')}`;
-const pDoc = await getDoc(doc(db,'progres_soal',docId));
-if(pDoc.exists()){
-const pData = {id:docId, ...pDoc.data()};
-bukaDetailKuis(pData);
-}
-
-alert('✅ Nilai uraian tersimpan! Skor percobaan ini: '+Math.round(skorTotal)+'/100.');
-
-if(document.getElementById('pilihKelasMonitor')){
-loadMonitorKelas(document.getElementById('pilihKelasMonitor').value);
-}
-
+modal.querySelector('#msgNilaiRiwayat').textContent='Nilai berhasil disimpan!';
+modal.querySelector('#msgNilaiRiwayat').classList.add('ok');
+setTimeout(()=>modal.remove(),1000);
 }catch(e){
-modal.querySelector('#msgNilaiRiwayat').textContent=errText(e);
-modal.querySelector('#simpanNilaiRiwayat').disabled=false;
+modal.querySelector('#msgNilaiRiwayat').textContent='Gagal: '+errText(e);
 }
 });
-}catch(e){
-alert(errText(e));
-}
+}catch(e){alert(errText(e));}
 };
 
-async function bukaFormFeedback(nama,kode,classId,progresList){
-const p=progresList.find(x=>x.studentNama===nama&&x.studentKode===kode);
-if(!p)return;
-const got=p.skorTotal||0;
-
-const fbs=await getDocs(query(collection(db,'feedback_soal'),where('studentNama','==',nama),where('studentKode','==',kode)));
-const oldText=fbs.size?fbs.docs[0].data().feedback:'';
-const oldId=fbs.size?fbs.docs[0].id:null;
-
+window.bukaFormFeedback=(nama,kode,classId,progres)=>{
+const docId=`${kode}_${nama.replace(/\s+/g,'_')}`;
+const current=progres.find(p=>p.studentNama===nama && p.studentKode===kode);
 const modal=document.createElement('div');
 modal.className='modal show';
 modal.innerHTML=`
-<div class="modal-card" style="max-width:560px">
-<h2>Feedback untuk ${esc(nama)}</h2>
-<p style="font-size:13px;color:#8984a5;margin-bottom:14px">Kode: ${esc(kode)} · Skor: ${Math.round(got)}/100</p>
+<div class="modal-card">
+<h2>💬 Feedback untuk ${esc(nama)}</h2>
+<p class="muted" style="margin-bottom:10px">Kode: ${esc(kode)}</p>
 <div class="template-btns">
 <button data-tpl="pujian">🎉 Pujian</button>
 <button data-tpl="motivasi">💪 Motivasi</button>
 <button data-tpl="saran">📚 Saran</button>
 <button data-tpl="perbaikan">⚠️ Perbaikan</button>
 </div>
-<textarea id="fbText" style="width:100%;min-height:110px;padding:12px;border:2px solid #e6def4;border-radius:12px;font-family:Nunito,sans-serif;font-size:14px;resize:vertical" placeholder="Tulis feedback...">${esc(oldText)}</textarea>
-<div style="display:flex;gap:10px;margin-top:14px">
-<button class="submit" id="fbSave" style="flex:1">Simpan Feedback</button>
-<button class="secondary" id="fbClose" style="flex:0 0 auto;padding:11px 20px">Batal</button>
+<div class="field">
+<label>Feedback</label>
+<textarea id="fbText" rows="5" placeholder="Tulis feedback..."></textarea>
 </div>
-<p class="message" id="fbMsg"></p>
+<button class="submit" id="simpanFb">Kirim Feedback</button>
+<p class="message" id="msgFb"></p>
+<button class="cancel" id="closeFb">Tutup</button>
 </div>`;
 document.body.appendChild(modal);
-renderKaTeX(modal);
-
-modal.querySelector('#fbClose').addEventListener('click',()=>modal.remove());
-modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
 
 modal.querySelectorAll('.template-btns button').forEach(b=>{
 b.addEventListener('click',()=>{
-modal.querySelector('#fbText').value=TEMPLATE_FB[b.dataset.tpl].replace('[nama]',nama);
+const tpl=TEMPLATE_FB[b.dataset.tpl].replace('[nama]',nama);
+modal.querySelector('#fbText').value=tpl;
 });
 });
 
-modal.querySelector('#fbSave').addEventListener('click',async()=>{
-const text=modal.querySelector('#fbText').value.trim();
-if(!text){modal.querySelector('#fbMsg').textContent='Feedback tidak boleh kosong.';return;}
+modal.querySelector('#closeFb').addEventListener('click',()=>modal.remove());
+modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+
+modal.querySelector('#simpanFb').addEventListener('click',async()=>{
+const txt=modal.querySelector('#fbText').value.trim();
+if(!txt){modal.querySelector('#msgFb').textContent='Feedback tidak boleh kosong.';return;}
 try{
-modal.querySelector('#fbSave').disabled=true;
-if(oldId){
-await updateDoc(doc(db,'feedback_soal',oldId),{feedback:text,createdAt:serverTimestamp()});
+const q=query(collection(db,'feedback_soal'),where('studentNama','==',nama),where('studentKode','==',kode));
+const s=await getDocs(q);
+const data={
+studentNama:nama,studentKode:kode,classId,classOwnerUid:profile.uid,
+feedback:txt,createdAt:serverTimestamp()
+};
+if(s.size){
+await updateDoc(doc(db,'feedback_soal',s.docs[0].id),data);
 }else{
-await addDoc(collection(db,'feedback_soal'),{
-studentNama:nama,
-studentKode:kode,
-classId,
-classOwnerUid:profile.uid,
-feedback:text,
-createdAt:serverTimestamp()
-});
+await addDoc(collection(db,'feedback_soal'),data);
 }
-modal.remove();
+modal.querySelector('#msgFb').textContent='Feedback terkirim!';
+modal.querySelector('#msgFb').classList.add('ok');
+setTimeout(()=>modal.remove(),800);
 }catch(e){
-modal.querySelector('#fbMsg').textContent=errText(e);
-modal.querySelector('#fbSave').disabled=false;
+modal.querySelector('#msgFb').textContent='Gagal: '+errText(e);
 }
 });
-}
-
-window.feedbackMassal=async function(tpl){
-const checked=[...document.querySelectorAll('.cb-murid:checked')];
-if(!checked.length){alert('Centang minimal 1 murid.');return;}
-const text=prompt('Template feedback (bisa diedit):',TEMPLATE_FB[tpl]);
-if(!text)return;
-const classId=$('pilihKelasMonitor').value;
-let ok=0;
-for(const cb of checked){
-const nama=cb.dataset.nama;
-const kode=cb.dataset.kode;
-try{
-const fbs=await getDocs(query(collection(db,'feedback_soal'),where('studentNama','==',nama),where('studentKode','==',kode)));
-const personal=text.replace('[nama]',nama);
-if(fbs.size){
-await updateDoc(doc(db,'feedback_soal',fbs.docs[0].id),{feedback:personal,createdAt:serverTimestamp()});
-}else{
-await addDoc(collection(db,'feedback_soal'),{
-studentNama:nama,studentKode:kode,classId,
-classOwnerUid:profile.uid,feedback:personal,createdAt:serverTimestamp()
-});
-}
-ok++;
-}catch(e){console.error(e);}
-}
-alert(`Feedback terkirim ke ${ok} murid.`);
 };
 
+window.feedbackMassal=async(tplKey)=>{
+const cbs=document.querySelectorAll('.cb-murid:checked');
+if(!cbs.length){alert('Centang minimal satu murid.');return;}
+if(!confirm(`Kirim feedback "${tplKey}" ke ${cbs.length} murid?`))return;
+let sukses=0;
+for(const cb of cbs){
+const nama=cb.dataset.nama;
+const kode=cb.dataset.kode;
+const txt=TEMPLATE_FB[tplKey].replace('[nama]',nama);
+try{
+const q=query(collection(db,'feedback_soal'),where('studentNama','==',nama),where('studentKode','==',kode));
+const s=await getDocs(q);
+const data={studentNama:nama,studentKode:kode,classId:cb.closest('tr')?.dataset?.classId||'',classOwnerUid:profile.uid,feedback:txt,createdAt:serverTimestamp()};
+if(s.size){
+await updateDoc(doc(db,'feedback_soal',s.docs[0].id),data);
+}else{
+await addDoc(collection(db,'feedback_soal'),data);
+}
+sukses++;
+}catch(e){console.warn(e);}
+}
+alert(`Feedback terkirim ke ${sukses}/${cbs.length} murid.`);
+};
 </script>
 </body>
 </html>
