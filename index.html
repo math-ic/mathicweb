@@ -5,12 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MATHIC — Mathematic Interaction Class</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<!-- ===== KATEX TAMBAHAN ===== -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
-<!-- ===== AKHIR KATEX TAMBAHAN ===== -->
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -96,7 +93,6 @@ h1 span{display:block;color:#8056d9}
 .student-menu button{flex:1;min-width:120px;padding:14px 12px;border:1px solid #e8def8;border-radius:14px;background:#f4effc;color:#6e49bd;font-weight:900;font-size:14px;position:relative;font-family:Nunito,sans-serif}
 .student-menu button.active{background:#8056d9;color:white;border-color:#8056d9}
 .student-content{margin-top:10px}
-
 .materi-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
 .materi-card{background:linear-gradient(145deg,#f8f2ff,#eee7ff);border:2px solid #eae0fb;border-radius:20px;padding:24px 20px;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;font-family:Nunito,sans-serif}
 .materi-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px #60468b22}
@@ -108,7 +104,6 @@ h1 span{display:block;color:#8056d9}
 .materi-frame-wrap iframe{width:100%;height:calc(100vh - 260px);min-height:600px;border:0;display:block}
 .materi-back{display:inline-flex;align-items:center;gap:8px;background:#f4effc;color:#6e49bd;border:0;border-radius:10px;padding:10px 18px;font-weight:900;font-size:14px;cursor:pointer;margin-bottom:18px;font-family:Nunito,sans-serif}
 .materi-back:hover{background:#e8dcfb}
-
 .practice-area{margin-top:10px}
 .practice-area h3{font-size:20px;margin-bottom:8px;color:#35256c}
 .practice-back{display:inline-flex;align-items:center;gap:8px;background:#f4effc;color:#6e49bd;border:0;border-radius:10px;padding:10px 18px;font-weight:900;font-size:14px;cursor:pointer;margin-bottom:18px;font-family:Nunito,sans-serif}
@@ -129,7 +124,6 @@ h1 span{display:block;color:#8056d9}
 @keyframes appearS{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .practice-result strong{color:#166534}
 .practice-result p{margin:8px 0;line-height:1.6}
-
 .kuis-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .kuis-progress{flex:1;min-width:200px}
 .kuis-progress-bar{height:8px;background:#f0e7ff;border-radius:4px;overflow:hidden;margin-top:6px}
@@ -166,12 +160,10 @@ h1 span{display:block;color:#8056d9}
 .kuis-predikat.c{background:#fff3d7;color:#946b08}
 .kuis-predikat.d{background:#ffe8d4;color:#a85617}
 .kuis-predikat.e{background:#fff0f2;color:#b3425a}
-
 .kuis-timer{display:inline-flex;align-items:center;gap:8px;background:#fff3d7;color:#946b08;padding:8px 16px;border-radius:10px;font-weight:900;font-size:14px;font-family:Nunito,sans-serif}
 .kuis-timer.warning{background:#ffe8d4;color:#a85617;animation:pulse 1s infinite}
 .kuis-timer.danger{background:#fff0f2;color:#b3425a;animation:pulse .5s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-
 .feedback-panel{background:#eaf9f2;border-left:4px solid #23866b;border-radius:14px;padding:16px;margin:14px 0;color:#1a5f4d;font-size:14px;line-height:1.7}
 .feedback-panel strong{color:#166534}
 .feedback-panel .meta{font-size:12px;color:#23866b;font-weight:700;margin-top:8px;display:block}
@@ -210,7 +202,6 @@ h1 span{display:block;color:#8056d9}
 .riwayat-head strong{font-size:13px;color:#35256c}
 .riwayat-head span{font-size:12px;color:#8984a5}
 .riwayat-score{font-weight:900;color:#8056d9;font-size:14px}
-
 @media(max-width:1100px){.page{grid-template-columns:1fr 1.05fr;padding:45px 6%}.right{display:none}}
 @media(max-width:650px){
 .page{display:flex;flex-direction:column;gap:28px;padding:35px 20px}
@@ -347,7 +338,6 @@ import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut
 import{getFirestore,collection,doc,getDoc,getDocs,addDoc,setDoc,updateDoc,deleteDoc,query,where,serverTimestamp,onSnapshot}from'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const ADMIN_EMAIL='umumbgt5@gmail.com';
-
 const firebaseConfig={
 apiKey:'AIzaSyDuVGHdk05SzOdTGuXsqfKZZwF1dYsmQDU',
 authDomain:'adaluang.firebaseapp.com',
@@ -367,575 +357,236 @@ let mode='login';
 let profile=null;
 let student=null;
 
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({
-'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* ===== KATEX TAMBAHAN ===== */
 function renderKaTeX(el){
   if(!el || typeof renderMathInElement==='undefined') return;
   renderMathInElement(el,{
-    delimiters:[
-      {left:'\\(',right:'\\)',display:false},
-      {left:'\\[',right:'\\]',display:true},
-      {left:'$$',right:'$$',display:true}
-    ],
-    throwOnError:false,
-    ignoredTags:["script","noscript","style","textarea","pre","code"]
+    delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true},{left:'$$',right:'$$',display:true}],
+    throwOnError:false,ignoredTags:["script","noscript","style","textarea","pre","code"]
   });
 }
-const katexObserver=new MutationObserver(()=>{
-  renderKaTeX(document.getElementById('content'));
-  renderKaTeX(document.getElementById('landing'));
-});
-document.addEventListener('DOMContentLoaded',()=>{
-  renderKaTeX(document.body);
-  katexObserver.observe(document.body,{childList:true,subtree:true});
-});
+const katexObserver=new MutationObserver(()=>{renderKaTeX(document.getElementById('content'));renderKaTeX(document.getElementById('landing'));});
+document.addEventListener('DOMContentLoaded',()=>{renderKaTeX(document.body);katexObserver.observe(document.body,{childList:true,subtree:true});});
 window.addEventListener('load',()=>renderKaTeX(document.body));
-/* ===== AKHIR KATEX TAMBAHAN ===== */
 
 function say(t,ok=false){$('message').textContent=t;$('message').classList.toggle('ok',ok);}
-
 function openModal(title,subtitle,button,fields){
-$('modalTitle').textContent=title;
-$('modalSubtitle').textContent=subtitle;
-$('submit').textContent=button;
-$('form').reset();
-say('');
-for(const [k,id] of Object.entries({name:'nameBox',email:'emailBox',password:'passBox',code:'codeBox'})){
-$(id).classList.toggle('hidden',!fields.includes(k));
-$(k).required=fields.includes(k);
+  $('modalTitle').textContent=title;$('modalSubtitle').textContent=subtitle;$('submit').textContent=button;
+  $('form').reset();say('');
+  for(const [k,id] of Object.entries({name:'nameBox',email:'emailBox',password:'passBox',code:'codeBox'})){
+    $(id).classList.toggle('hidden',!fields.includes(k));$(k).required=fields.includes(k);
+  }
+  $('modal').classList.add('show');
 }
-$('modal').classList.add('show');
-}
-
 window.closeModal=()=>$('modal').classList.remove('show');
-
 window.openTeacher=()=>{mode='login';openModal('Masuk Ruang Guru','Admin masuk menggunakan email admin. Guru harus memiliki akun yang disetujui admin.','Masuk',['email','password']);};
 window.openRegister=()=>{mode='register';openModal('Daftar Akun Guru','Akun guru harus disetujui admin sebelum membuat kelas.','Daftar',['name','email','password']);};
 window.openStudent=()=>{mode='student';openModal('Masuk Ruang Murid','Masukkan nama dan kode kelas dari guru.','Mulai Belajar',['name','code']);};
-
 $('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal();});
 
 function errText(e){
-const errors={'auth/invalid-credential':'Email atau kata sandi salah.','auth/email-already-in-use':'Email sudah terdaftar.','auth/weak-password':'Kata sandi minimal 6 karakter.','auth/invalid-email':'Format email tidak valid.','permission-denied':'Akses ditolak. Periksa Firestore Rules.'};
-return errors[e.code]||e.message||'Terjadi kesalahan.';
+  const errors={'auth/invalid-credential':'Email atau kata sandi salah.','auth/email-already-in-use':'Email sudah terdaftar.','auth/weak-password':'Kata sandi minimal 6 karakter.','auth/invalid-email':'Format email tidak valid.','permission-denied':'Akses ditolak. Periksa Firestore Rules.'};
+  return errors[e.code]||e.message||'Terjadi kesalahan.';
 }
 
 async function getProfile(u){
-const r=doc(db,'users',u.uid);
-const s=await getDoc(r);
-if(s.exists())return s.data();
-if((u.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase()){
-const p={nama:'Admin MATHIC',email:u.email,role:'admin',status:'approved',createdAt:serverTimestamp()};
-await setDoc(r,p);
-return p;
-}
-return null;
+  const r=doc(db,'users',u.uid);const s=await getDoc(r);
+  if(s.exists())return s.data();
+  if((u.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase()){
+    const p={nama:'Admin MATHIC',email:u.email,role:'admin',status:'approved',createdAt:serverTimestamp()};
+    await setDoc(r,p);return p;
+  }
+  return null;
 }
 
 $('form').addEventListener('submit',async e=>{
-e.preventDefault();
-$('submit').disabled=true;
-try{
-if(mode==='register'){
-const nama=$('name').value.trim();
-const email=$('email').value.trim().toLowerCase();
-const password=$('password').value;
-if(!nama)throw Error('Nama wajib diisi.');
-if(email===ADMIN_EMAIL.toLowerCase())throw Error('Email admin tidak bisa digunakan untuk pendaftaran guru.');
-const c=await createUserWithEmailAndPassword(auth,email,password);
-await setDoc(doc(db,'users',c.user.uid),{nama,email,role:'guru',status:'pending',createdAt:serverTimestamp()});
-await signOut(auth);
-say('Pendaftaran berhasil. Tunggu persetujuan admin.',true);
-return;
-}
-if(mode==='student'){
-const nama=$('name').value.trim();
-const kode=$('code').value.trim().toUpperCase();
-if(!nama||!kode)throw Error('Nama dan kode kelas wajib diisi.');
-const s=await getDocs(collection(db,'classes'));
-const d=s.docs.find(x=>(x.data().kode||'').toUpperCase()===kode);
-if(!d)throw Error('Kode kelas tidak ditemukan. Periksa kembali kode dari guru.');
-student={nama,kode,id:d.id,data:d.data()};
-closeModal();
-renderStudent();
-return;
-}
-await signInWithEmailAndPassword(auth,$('email').value.trim().toLowerCase(),$('password').value);
-closeModal();
-}catch(e){
-say(errText(e));
-}finally{
-$('submit').disabled=false;
-}
+  e.preventDefault();$('submit').disabled=true;
+  try{
+    if(mode==='register'){
+      const nama=$('name').value.trim();const email=$('email').value.trim().toLowerCase();const password=$('password').value;
+      if(!nama)throw Error('Nama wajib diisi.');
+      if(email===ADMIN_EMAIL.toLowerCase())throw Error('Email admin tidak bisa digunakan untuk pendaftaran guru.');
+      const c=await createUserWithEmailAndPassword(auth,email,password);
+      await setDoc(doc(db,'users',c.user.uid),{nama,email,role:'guru',status:'pending',createdAt:serverTimestamp()});
+      await signOut(auth);say('Pendaftaran berhasil. Tunggu persetujuan admin.',true);return;
+    }
+    if(mode==='student'){
+      const nama=$('name').value.trim();const kode=$('code').value.trim().toUpperCase();
+      if(!nama||!kode)throw Error('Nama dan kode kelas wajib diisi.');
+      const s=await getDocs(collection(db,'classes'));
+      const d=s.docs.find(x=>(x.data().kode||'').toUpperCase()===kode);
+      if(!d)throw Error('Kode kelas tidak ditemukan. Periksa kembali kode dari guru.');
+      student={nama,kode,id:d.id,data:d.data()};
+      closeModal();renderStudent();return;
+    }
+    await signInWithEmailAndPassword(auth,$('email').value.trim().toLowerCase(),$('password').value);
+    closeModal();
+  }catch(e){say(errText(e));}finally{$('submit').disabled=false;}
 });
 
 onAuthStateChanged(auth,async u=>{
-if(!u){profile=null;return;}
-try{
-let p=await getProfile(u);
-if(!p){await signOut(auth);alert('Profil akun tidak ditemukan. Daftar akun guru terlebih dahulu.');return;}
-if(u.email.toLowerCase()===ADMIN_EMAIL.toLowerCase()&&p.role!=='admin'){
-await updateDoc(doc(db,'users',u.uid),{role:'admin',status:'approved'});
-p.role='admin';p.status='approved';
-}
-if(p.role==='guru'&&p.status!=='approved'){
-await signOut(auth);
-alert(p.status==='rejected'?'Akun guru ditolak admin.':'Akun guru masih menunggu persetujuan admin.');
-return;
-}
-if(!['admin','guru'].includes(p.role)){
-await signOut(auth);
-alert('Peran akun tidak valid.');
-return;
-}
-profile={...p,uid:u.uid,email:u.email};
-student=null;
-showDashboard();
-}catch(e){
-alert(errText(e));
-await signOut(auth);
-}
+  if(!u){profile=null;return;}
+  try{
+    let p=await getProfile(u);
+    if(!p){await signOut(auth);alert('Profil akun tidak ditemukan.');return;}
+    if(u.email.toLowerCase()===ADMIN_EMAIL.toLowerCase()&&p.role!=='admin'){await updateDoc(doc(db,'users',u.uid),{role:'admin',status:'approved'});p.role='admin';p.status='approved';}
+    if(p.role==='guru'&&p.status!=='approved'){await signOut(auth);alert(p.status==='rejected'?'Akun guru ditolak.':'Akun guru masih menunggu persetujuan.');return;}
+    if(!['admin','guru'].includes(p.role)){await signOut(auth);alert('Peran akun tidak valid.');return;}
+    profile={...p,uid:u.uid,email:u.email};student=null;showDashboard();
+  }catch(e){alert(errText(e));await signOut(auth);}
 });
 
-function showShell(label){
-$('landing').style.display='none';
-$('app').classList.add('show');
-$('userLine').textContent=label;
-}
+function showShell(label){$('landing').style.display='none';$('app').classList.add('show');$('userLine').textContent=label;}
+function showDashboard(){showShell((profile.nama||profile.email)+' · '+(profile.role==='admin'?'Admin':'Guru'));if(profile.role==='admin')adminDashboard();else teacherDashboard();}
+window.logout=async()=>{hentikanMonitor();hentikanTimer();if(auth.currentUser)await signOut(auth);profile=null;student=null;$('app').classList.remove('show');$('landing').style.display='block';};
+function item(title,body){return `<article class="item"><h3>${esc(title||'Kelas')}</h3>${body}</article>`;}
 
-function showDashboard(){
-showShell((profile.nama||profile.email)+' · '+(profile.role==='admin'?'Admin':'Guru'));
-if(profile.role==='admin')adminDashboard();
-else teacherDashboard();
-}
-
-window.logout=async()=>{
-hentikanMonitor();
-hentikanTimer();
-if(auth.currentUser)await signOut(auth);
-profile=null;student=null;
-$('app').classList.remove('show');
-$('landing').style.display='block';
-};
-
-function item(title,body){
-return `<article class="item"><h3>${esc(title||'Kelas')}</h3>${body}</article>`;
-}
-
-/* ================= ADMIN ================= */
-
+/* ADMIN */
 async function adminDashboard(){
-$('content').innerHTML=`
-<section class="panel">
-<h2>Dashboard Admin</h2>
-<p class="muted">Kelola pendaftaran guru, pantau status akun, dan kelola kelas MATHIC.</p>
-<div id="adminStats" class="stats"><div class="empty">Memuat statistik...</div></div>
-<div class="tabs">
-<button type="button" onclick="adminTab('guru')">Manajemen Guru</button>
-<button type="button" onclick="adminTab('kelas')">Manajemen Kelas</button>
-</div>
-<div id="adminSection"></div>
-</section>`;
-try{
-const us=await getDocs(collection(db,'users'));
-const cs=await getDocs(collection(db,'classes'));
-const teachers=us.docs.map(d=>d.data()).filter(x=>x.role==='guru');
-const total=teachers.length;
-const active=teachers.filter(x=>x.status==='approved').length;
-const pending=teachers.filter(x=>x.status==='pending').length;
-const rejected=teachers.filter(x=>x.status==='rejected').length;
-$('adminStats').innerHTML=`
-<div class="stat"><strong>${total}</strong><span>Total Guru</span></div>
-<div class="stat"><strong>${active}</strong><span>Guru Aktif</span></div>
-<div class="stat"><strong>${pending}</strong><span>Menunggu Persetujuan</span></div>
-<div class="stat"><strong>${rejected}</strong><span>Guru Ditolak</span></div>
-<div class="stat"><strong>${cs.size}</strong><span>Total Kelas</span></div>`;
-await adminTab('guru');
-}catch(e){
-$('adminStats').innerHTML=`<div class="empty">Gagal memuat statistik: ${esc(errText(e))}</div>`;
-$('adminSection').innerHTML=`<div class="empty">Periksa izin akses Firestore lalu muat ulang halaman.</div>`;
-}
+  $('content').innerHTML=`<section class="panel"><h2>Dashboard Admin</h2><p class="muted">Kelola pendaftaran guru & kelas.</p><div id="adminStats" class="stats"><div class="empty">Memuat...</div></div><div class="tabs"><button onclick="adminTab('guru')">Manajemen Guru</button><button onclick="adminTab('kelas')">Manajemen Kelas</button></div><div id="adminSection"></div></section>`;
+  try{
+    const us=await getDocs(collection(db,'users'));const cs=await getDocs(collection(db,'classes'));
+    const ts=us.docs.map(d=>d.data()).filter(x=>x.role==='guru');
+    $('adminStats').innerHTML=`<div class="stat"><strong>${ts.length}</strong><span>Total Guru</span></div><div class="stat"><strong>${ts.filter(x=>x.status==='approved').length}</strong><span>Guru Aktif</span></div><div class="stat"><strong>${ts.filter(x=>x.status==='pending').length}</strong><span>Pending</span></div><div class="stat"><strong>${ts.filter(x=>x.status==='rejected').length}</strong><span>Ditolak</span></div><div class="stat"><strong>${cs.size}</strong><span>Total Kelas</span></div>`;
+    await adminTab('guru');
+  }catch(e){$('adminStats').innerHTML=`<div class="empty">Gagal: ${esc(errText(e))}</div>`;}
 }
 
 window.adminTab=async tab=>{
-const el=$('adminSection');
-el.innerHTML='<div class="empty">Memuat…</div>';
-try{
-if(tab==='guru'){
-const s=await getDocs(collection(db,'users'));
-const ts=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.role==='guru');
-el.innerHTML=ts.length?`<div class="items">${ts.map(t=>item(t.nama,`
-<p class="muted">${esc(t.email)}</p>
-<span class="tag ${esc(t.status)}">${esc(t.status)}</span>
-<div class="actions">
-${t.status!=='approved'?`<button type="button" class="small-btn" onclick="setStatus('${t.id}','approved')">Terima</button>`:''}
-${t.status!=='rejected'?`<button type="button" class="danger" onclick="setStatus('${t.id}','rejected')">Tolak</button>`:''}
-</div>
-`)).join('')}</div>`:'<div class="empty">Belum ada akun guru.</div>';
-}else{
-const s=await getDocs(collection(db,'classes'));
-el.innerHTML=s.size?`<div class="items">${s.docs.map(d=>item(d.data().nama,`
-<p class="muted">${esc(d.data().ownerEmail)}</p>
-<div class="code">${esc(d.data().kode)}</div>
-<div class="actions"><button type="button" class="danger" onclick="deleteClass('${d.id}')">Hapus kelas</button></div>
-`)).join('')}</div>`:'<div class="empty">Belum ada kelas.</div>';
-}
-}catch(e){
-el.innerHTML=`<div class="empty">${esc(errText(e))}</div>`;
-}
+  const el=$('adminSection');el.innerHTML='<div class="empty">Memuat…</div>';
+  try{
+    if(tab==='guru'){
+      const s=await getDocs(collection(db,'users'));
+      const ts=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.role==='guru');
+      el.innerHTML=ts.length?`<div class="items">${ts.map(t=>item(t.nama,`<p class="muted">${esc(t.email)}</p><span class="tag ${esc(t.status)}">${esc(t.status)}</span><div class="actions">${t.status!=='approved'?`<button class="small-btn" onclick="setStatus('${t.id}','approved')">Terima</button>`:''}${t.status!=='rejected'?`<button class="danger" onclick="setStatus('${t.id}','rejected')">Tolak</button>`:''}</div>`)).join('')}</div>`:'<div class="empty">Belum ada guru.</div>';
+    }else{
+      const s=await getDocs(collection(db,'classes'));
+      el.innerHTML=s.size?`<div class="items">${s.docs.map(d=>item(d.data().nama,`<p class="muted">${esc(d.data().ownerEmail)}</p><div class="code">${esc(d.data().kode)}</div><div class="actions"><button class="danger" onclick="deleteClass('${d.id}')">Hapus</button></div>`)).join('')}</div>`:'<div class="empty">Belum ada kelas.</div>';
+    }
+  }catch(e){el.innerHTML=`<div class="empty">${esc(errText(e))}</div>`;}
 };
+window.setStatus=async(id,status)=>{try{await updateDoc(doc(db,'users',id),{status});await adminTab('guru');}catch(e){alert(errText(e));}};
+window.deleteClass=async id=>{if(!confirm('Hapus?'))return;try{await deleteDoc(doc(db,'classes',id));await adminTab('kelas');}catch(e){alert(errText(e));}};
 
-window.setStatus=async(id,status)=>{
-try{await updateDoc(doc(db,'users',id),{status});await adminTab('guru');}catch(e){alert(errText(e));}
-};
-
-window.deleteClass=async id=>{
-if(!confirm('Hapus kelas ini?'))return;
-try{await deleteDoc(doc(db,'classes',id));await adminTab('kelas');}catch(e){alert(errText(e));}
-};
-
-/* ================= GURU ================= */
-
+/* GURU */
 async function teacherDashboard(){
-$('content').innerHTML=`
-<section class="panel">
-<h2>Ruang Guru</h2>
-<p class="muted">Guru yang disetujui dapat membuat kelas dan membagikan kode kepada murid.</p>
-<form id="classForm" class="inline">
-<div class="field"><label>Nama kelas</label><input id="cname" required maxlength="80" placeholder="Contoh: X-1 Peluang"></div>
-<div class="field"><label>Keterangan (opsional)</label><input id="cdesc" maxlength="120" placeholder="Matematika"></div>
-<div class="full"><button class="submit">+ Buat kelas</button><p id="cmsg" class="message"></p></div>
-</form>
-</section>
-<section class="panel">
-<h2>Kelas Saya</h2>
-<p class="muted">Bagikan kode kelas di bawah kepada murid.</p>
-<div id="myClasses" class="items"></div>
-<div style="margin-top:16px">
-<button class="submit" style="width:auto;padding:11px 22px" onclick="renderMonitoringGuru()">📊 Buka Monitoring Kuis</button>
-</div>
-</section>`;
-$('classForm').addEventListener('submit',createClass);
-await loadClasses();
+  $('content').innerHTML=`<section class="panel"><h2>Ruang Guru</h2><p class="muted">Buat kelas & bagikan kode.</p><form id="classForm" class="inline"><div class="field"><label>Nama kelas</label><input id="cname" required maxlength="80" placeholder="Contoh: X-1 Peluang"></div><div class="field"><label>Keterangan</label><input id="cdesc" maxlength="120" placeholder="Matematika"></div><div class="full"><button class="submit">+ Buat kelas</button><p id="cmsg" class="message"></p></div></form></section><section class="panel"><h2>Kelas Saya</h2><div id="myClasses" class="items"></div><div style="margin-top:16px"><button class="submit" style="width:auto;padding:11px 22px" onclick="renderMonitoringGuru()">📊 Monitoring Kuis</button></div></section>`;
+  $('classForm').addEventListener('submit',createClass);await loadClasses();
 }
-
 function genCode(){return Math.random().toString(36).slice(2,8).toUpperCase();}
-
 async function createClass(e){
-e.preventDefault();
-try{
-const all=await getDocs(collection(db,'classes'));
-let kode=genCode();
-while(all.docs.some(d=>d.data().kode===kode)){kode=genCode();}
-await addDoc(collection(db,'classes'),{
-nama:$('cname').value.trim(),
-deskripsi:$('cdesc').value.trim(),
-kode,
-ownerUid:profile.uid,
-ownerEmail:profile.email,
-createdAt:serverTimestamp()
-});
-$('cmsg').textContent='Kelas berhasil dibuat. Kode: '+kode;
-$('cmsg').classList.add('ok');
-$('classForm').reset();
-await loadClasses();
-}catch(e){$('cmsg').textContent=errText(e);}
+  e.preventDefault();
+  try{
+    const all=await getDocs(collection(db,'classes'));let kode=genCode();
+    while(all.docs.some(d=>d.data().kode===kode)){kode=genCode();}
+    await addDoc(collection(db,'classes'),{nama:$('cname').value.trim(),deskripsi:$('cdesc').value.trim(),kode,ownerUid:profile.uid,ownerEmail:profile.email,createdAt:serverTimestamp()});
+    $('cmsg').textContent='Kelas dibuat. Kode: '+kode;$('cmsg').classList.add('ok');$('classForm').reset();await loadClasses();
+  }catch(e){$('cmsg').textContent=errText(e);}
 }
-
 async function loadClasses(){
-const s=await getDocs(query(collection(db,'classes'),where('ownerUid','==',profile.uid)));
-$('myClasses').innerHTML=s.size?s.docs.map(d=>item(d.data().nama,`
-<p class="muted">${esc(d.data().deskripsi||'')}</p>
-<div class="code">${esc(d.data().kode)}</div>
-<p class="muted">Bagikan kode ini kepada murid.</p>
-<div class="actions">
-<button type="button" class="small-btn" onclick="copyCode('${esc(d.data().kode)}')">Salin kode</button>
-<button type="button" class="danger" onclick="teacherDeleteClass('${d.id}')">Hapus kelas</button>
-</div>
-`)).join(''):'<div class="empty">Kamu belum membuat kelas.</div>';
+  const s=await getDocs(query(collection(db,'classes'),where('ownerUid','==',profile.uid)));
+  $('myClasses').innerHTML=s.size?s.docs.map(d=>item(d.data().nama,`<p class="muted">${esc(d.data().deskripsi||'')}</p><div class="code">${esc(d.data().kode)}</div><div class="actions"><button class="small-btn" onclick="copyCode('${esc(d.data().kode)}')">Salin</button><button class="danger" onclick="teacherDeleteClass('${d.id}')">Hapus</button></div>`)).join(''):'<div class="empty">Belum ada kelas.</div>';
 }
-
-window.copyCode=async c=>{
-try{await navigator.clipboard.writeText(c);alert('Kode kelas disalin: '+c);}catch{prompt('Salin kode kelas:',c);}
-};
-
-window.teacherDeleteClass=async id=>{
-if(!confirm('Hapus kelas ini?'))return;
-try{await deleteDoc(doc(db,'classes',id));await loadClasses();}catch(e){alert(errText(e));}
-};
-
-/* ================= MURID ================= */
-
+window.copyCode=async c=>{try{await navigator.clipboard.writeText(c);alert('Disalin: '+c);}catch{prompt('Kode:',c);}};
+window.teacherDeleteClass=async id=>{if(!confirm('Hapus?'))return;try{await deleteDoc(doc(db,'classes',id));await loadClasses();}catch(e){alert(errText(e));}};
+  /* MURID */
 async function renderStudent(){
-showShell(student.nama+' · Murid · Kelas '+student.kode);
-sessionStorage.setItem('studentInfo', JSON.stringify({
-  studentNama: student.nama,
-  studentKode: student.kode,
-  classId: student.id,
-  classOwnerUid: student.data.ownerUid
-}));
-$('content').innerHTML=`
-<section class="panel">
-<h2>Halo, ${esc(student.nama)}! 👋</h2>
-<p class="muted">Selamat datang di kelas <strong>${esc(student.data.nama)}</strong>.</p>
-<div class="code">Kode kelas: ${esc(student.kode)}</div>
-<p class="muted">${esc(student.data.deskripsi||'')}</p>
-</section>
-<section class="panel">
-<h2>Ruang Belajar</h2>
-<p class="muted">Pilih menu yang ingin kamu buka.</p>
-<div class="student-menu">
-<button type="button" id="btnMateri" onclick="studentTab('materi')">📚 Materi</button>
-<button type="button" id="btnLab" onclick="studentTab('lab')">🎲 Lab</button>
-<button type="button" id="btnLatihan" onclick="studentTab('latihan')">📝 Latihan</button>
-<button type="button" id="btnKuis" onclick="studentTab('kuis')">📋 Kuis</button>
-</div>
-<div id="studentSection" class="student-content"></div>
-</section>`;
+  showShell(student.nama+' · Murid · Kelas '+student.kode);
+  sessionStorage.setItem('studentInfo',JSON.stringify({studentNama:student.nama,studentKode:student.kode,classId:student.id,classOwnerUid:student.data.ownerUid}));
+  $('content').innerHTML=`<section class="panel"><h2>Halo, ${esc(student.nama)}! 👋</h2><p class="muted">Selamat datang di <strong>${esc(student.data.nama)}</strong>.</p><div class="code">Kode: ${esc(student.kode)}</div></section><section class="panel"><h2>Ruang Belajar</h2><div class="student-menu"><button id="btnMateri" onclick="studentTab('materi')">📚 Materi</button><button id="btnLab" onclick="studentTab('lab')">🎲 Lab</button><button id="btnLatihan" onclick="studentTab('latihan')">📝 Latihan</button><button id="btnKuis" onclick="studentTab('kuis')">📋 Kuis</button></div><div id="studentSection" class="student-content"></div></section>`;
 }
-
 window.studentTab=async tab=>{
-const section=$('studentSection');
-const ids={materi:'btnMateri',lab:'btnLab',latihan:'btnLatihan',kuis:'btnKuis'};
-Object.values(ids).forEach(id=>{ const b=$(id); if(b) b.classList.remove('active'); });
-if(ids[tab]) $(ids[tab]).classList.add('active');
-
-if(tab==='materi'){
-section.innerHTML=`
-<h3>Materi Pembelajaran</h3>
-<p class="muted">Pilih materi yang ingin kamu pelajari.</p>
-<div class="materi-cards">
-<div class="materi-card" onclick="bukaMateri('materiA')">
-<span class="materi-icon">📘</span>
-<h3>Konsep Dasar Peluang</h3>
-<p>Ruang sampel, frekuensi relatif, peluang kejadian, komplemen, frekuensi harapan.</p>
-<span class="materi-btn">Buka Materi →</span>
-</div>
-<div class="materi-card" onclick="bukaMateri('materiB')">
-<span class="materi-icon">📗</span>
-<h3>Kejadian Majemuk</h3>
-<p>Saling lepas, tidak saling lepas, saling bebas, dan peluang bersyarat.</p>
-<span class="materi-btn">Buka Materi →</span>
-</div>
-</div>`;
-}else if(tab==='lab'){
-section.innerHTML=`
-<h3>Lab Peluang</h3>
-<p class="muted">Eksperimen interaktif dengan dadu untuk menemukan peluang teoretis.</p>
-<div class="materi-frame-wrap">
-<iframe src="materi.html?tab=materiC" title="Lab Peluang"></iframe>
-</div>`;
-}else if(tab==='latihan'){
-renderLatihanMenu();
-}else if(tab==='kuis'){
-await renderKuisMenu();
-}
+  const section=$('studentSection');
+  const ids={materi:'btnMateri',lab:'btnLab',latihan:'btnLatihan',kuis:'btnKuis'};
+  Object.values(ids).forEach(id=>{const b=$(id);if(b)b.classList.remove('active');});
+  if(ids[tab])$(ids[tab]).classList.add('active');
+  if(tab==='materi'){section.innerHTML=`<h3>Materi</h3><div class="materi-cards"><div class="materi-card" onclick="bukaMateri('materiA')"><span class="materi-icon">📘</span><h3>Konsep Dasar</h3><p>Ruang sampel, frekuensi, peluang.</p><span class="materi-btn">Buka →</span></div><div class="materi-card" onclick="bukaMateri('materiB')"><span class="materi-icon">📗</span><h3>Kejadian Majemuk</h3><p>Saling lepas, bebas, bersyarat.</p><span class="materi-btn">Buka →</span></div></div>`;}
+  else if(tab==='lab'){section.innerHTML=`<h3>Lab Peluang</h3><div class="materi-frame-wrap"><iframe src="materi.html?tab=materiC"></iframe></div>`;}
+  else if(tab==='latihan'){renderLatihanMenu();}
+  else if(tab==='kuis'){await renderKuisMenu();}
 };
+window.bukaMateri=tab=>{$('studentSection').innerHTML=`<button class="materi-back" onclick="studentTab('materi')">← Kembali</button><div class="materi-frame-wrap"><iframe src="materi.html?tab=${encodeURIComponent(tab)}"></iframe></div>`;};
 
-window.bukaMateri=tab=>{
-const section=$('studentSection');
-section.innerHTML=`
-<button class="materi-back" onclick="studentTab('materi')">← Kembali ke Materi</button>
-<div class="materi-frame-wrap">
-<iframe src="materi.html?tab=${encodeURIComponent(tab)}" title="Materi"></iframe>
-</div>`;
-};
-/* ================= LATIHAN (PG) — REVISI PECAHAN VERTIKAL ================= */
-
-const latihanData={
-pg:[
-{q:'Banyak anggota ruang sampel pada pelemparan sebuah dadu dan dua keping uang logam adalah ....',o:['10','12','24','36','48'],a:2,e:'Satu dadu = \\( 6 \\) kemungkinan. Dua koin = \\( 2 \\times 2 = 4 \\) kemungkinan. \\( n(S) = 6 \\times 4 = 24 \\).'},
-{q:'Banyak anggota kejadian muncul dua sisi gambar pada pelemparan tiga keping uang logam adalah ....',o:['2','3','4','5','6'],a:1,e:'Ruang sampel tiga koin: \\( 8 \\) hasil. Muncul tepat dua gambar: GGA, GAG, AGG \\( \\rightarrow 3 \\) hasil. Jadi \\( n(A) = 3 \\).'},
-{q:'Di kantong terdapat 21 kelereng kuning, 27 kelereng merah, dan 42 kelereng hijau. Peluang terambil kelereng hijau adalah ....',o:['\\( \\dfrac{5}{99} \\)','\\( \\dfrac{7}{18} \\)','\\( \\dfrac{3}{10} \\)','\\( \\dfrac{11}{30} \\)','\\( \\dfrac{7}{15} \\)'],a:4,e:'\\( n(S) = 21+27+42 = 90 \\). \\( n(A) = 42 \\). \\( P = \\dfrac{42}{90} = \\dfrac{7}{15} \\).'},
-{q:'Dua dadu dilempar 48 kali. Frekuensi harapan muncul mata dadu berjumlah kurang dari 5 adalah ....',o:['8 kali','10 kali','12 kali','16 kali','18 kali'],a:0,e:'\\( n(S)=36 \\). Jumlah \\( < 5 \\): (1,1),(1,2),(2,1),(1,3),(2,2),(3,1) \\( \\rightarrow 6 \\). \\( P = \\dfrac{6}{36} = \\dfrac{1}{6} \\). \\( F_h = \\dfrac{1}{6} \\times 48 = 8 \\) kali.'},
-{q:'Kotak berisi 6 bola kuning dan 9 bola merah. Diambil dua bola sekaligus. Peluang terambil dua bola berwarna sama adalah ....',o:['\\( \\dfrac{16}{21} \\)','\\( \\dfrac{17}{21} \\)','\\( \\dfrac{105}{52} \\)','\\( \\dfrac{17}{35} \\)','\\( \\dfrac{37}{70} \\)'],a:3,e:'\\( n(S)=C(15,2)=105 \\). Dua kuning \\(=C(6,2)=15\\). Dua merah \\(=C(9,2)=36\\). \\( n(A)=51 \\). \\( P=\\dfrac{51}{105}=\\dfrac{17}{35} \\).'},
-{q:'Dua kartu diambil satu per satu tanpa pengembalian dari 52 kartu bridge. Peluang keduanya berwarna merah adalah ....',o:['\\( \\dfrac{3}{52} \\)','\\( \\dfrac{6}{25} \\)','\\( \\dfrac{25}{102} \\)','\\( \\dfrac{1}{4} \\)','\\( \\dfrac{50}{102} \\)'],a:2,e:'\\( P(\\text{merah 1})=\\dfrac{26}{52}=\\dfrac{1}{2} \\). \\( P(\\text{merah 2}|\\text{merah 1})=\\dfrac{25}{51} \\). \\( P=\\dfrac{1}{2}\\times\\dfrac{25}{51}=\\dfrac{25}{102} \\).'}
-]
-};
+/* LATIHAN */
+const latihanData={pg:[
+{q:'Banyak anggota ruang sampel pada pelemparan sebuah dadu dan dua keping uang logam adalah ....',o:['10','12','24','36','48'],a:2,e:'Satu dadu = \\( 6 \\). Dua koin = \\( 4 \\). \\( n(S)=24 \\).'},
+{q:'Banyak anggota kejadian muncul dua sisi gambar pada pelemparan tiga keping uang logam adalah ....',o:['2','3','4','5','6'],a:1,e:'\\( n(S)=8 \\). GGA, GAG, AGG \\( \\rightarrow 3 \\).'},
+{q:'Di kantong terdapat 21 kelereng kuning, 27 merah, dan 42 hijau. Peluang terambil hijau adalah ....',o:['\\( \\dfrac{5}{99} \\)','\\( \\dfrac{7}{18} \\)','\\( \\dfrac{3}{10} \\)','\\( \\dfrac{11}{30} \\)','\\( \\dfrac{7}{15} \\)'],a:4,e:'\\( n(S)=90 \\). \\( n(A)=42 \\). \\( P=\\dfrac{42}{90}=\\dfrac{7}{15} \\).'},
+{q:'Dua dadu dilempar 48 kali. Frekuensi harapan jumlah < 5 adalah ....',o:['8 kali','10 kali','12 kali','16 kali','18 kali'],a:0,e:'\\( n(S)=36 \\). Jumlah < 5 ada 6. \\( P=\\dfrac{1}{6} \\). \\( F_h=8 \\).'},
+{q:'Kotak berisi 6 bola kuning dan 9 bola merah. Diambil dua sekaligus. Peluang dua bola sama warna adalah ....',o:['\\( \\dfrac{16}{21} \\)','\\( \\dfrac{17}{21} \\)','\\( \\dfrac{105}{52} \\)','\\( \\dfrac{17}{35} \\)','\\( \\dfrac{37}{70} \\)'],a:3,e:'\\( n(S)=105 \\). Dua kuning=15, dua merah=36. \\( P=\\dfrac{51}{105}=\\dfrac{17}{35} \\).'},
+{q:'Dua kartu diambil satu per satu tanpa pengembalian dari 52 kartu. Peluang keduanya merah adalah ....',o:['\\( \\dfrac{3}{52} \\)','\\( \\dfrac{6}{25} \\)','\\( \\dfrac{25}{102} \\)','\\( \\dfrac{1}{4} \\)','\\( \\dfrac{50}{102} \\)'],a:2,e:'\\( P=\\dfrac{1}{2}\\times\\dfrac{25}{51}=\\dfrac{25}{102} \\).'}
+]};
 
 window.renderLatihanMenu=()=>{
-const section=$('studentSection');
-section.innerHTML=`<div class="practice-area">
-<h3>Latihan Pilihan Ganda</h3>
-<p class="muted">Latihan ini tidak dinilai. Setelah selesai, kamu bisa melihat pembahasan tiap soal.</p>
-<div id="latihanQuestions"></div>
-<div style="display:flex;gap:10px;flex-wrap:wrap">
-<button class="practice-btn" id="latihanCheck" disabled onclick="periksaLatihan()">Selesai & Lihat Pembahasan</button>
-<button class="practice-btn secondary" onclick="studentTab('latihan')">Ulangi</button>
-</div>
-<div id="latihanResult" class="practice-result"></div>
-</div>`;
-
-$('latihanQuestions').innerHTML=latihanData.pg.map((x,i)=>`
-<div class="question-card">
-<div class="question-number">SOAL ${i+1}</div>
-<h4>${x.q}</h4>
-${x.o.map((v,j)=>`
-<label class="question-option">
-<input type="radio" name="lat${i}" value="${j}" onchange="cekLatihanLengkap()">
-<span>${String.fromCharCode(65+j)}. ${v}</span>
-</label>`).join('')}
-</div>`).join('');
-renderKaTeX(section);
+  const section=$('studentSection');
+  section.innerHTML=`<div class="practice-area"><h3>Latihan</h3><div id="latihanQuestions"></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="practice-btn" id="latihanCheck" disabled onclick="periksaLatihan()">Selesai & Pembahasan</button><button class="practice-btn secondary" onclick="studentTab('latihan')">Ulangi</button></div><div id="latihanResult" class="practice-result"></div></div>`;
+  $('latihanQuestions').innerHTML=latihanData.pg.map((x,i)=>`<div class="question-card"><div class="question-number">SOAL ${i+1}</div><h4>${x.q}</h4>${x.o.map((v,j)=>`<label class="question-option"><input type="radio" name="lat${i}" value="${j}" onchange="cekLatihanLengkap()"><span>${String.fromCharCode(65+j)}. ${v}</span></label>`).join('')}</div>`).join('');
+  renderKaTeX(section);
 };
-
-window.cekLatihanLengkap=()=>{
-let lengkap=true;
-latihanData.pg.forEach((_,i)=>{
-if(!document.querySelector(`input[name="lat${i}"]:checked`)) lengkap=false;
-});
-const btn=$('latihanCheck');
-if(btn) btn.disabled=!lengkap;
-};
-
+window.cekLatihanLengkap=()=>{let lengkap=true;latihanData.pg.forEach((_,i)=>{if(!document.querySelector(`input[name="lat${i}"]:checked`))lengkap=false;});const btn=$('latihanCheck');if(btn)btn.disabled=!lengkap;};
 window.periksaLatihan=()=>{
-let benar=0;
-const details=[];
-latihanData.pg.forEach((x,i)=>{
-const chosen=document.querySelector(`input[name="lat${i}"]:checked`);
-const ok=chosen && Number(chosen.value)===x.a;
-if(ok) benar++;
-details.push(`<p><strong>Soal ${i+1}: ${ok?'Benar':'Belum tepat'}.</strong> ${x.e}</p>`);
-});
-const result=$('latihanResult');
-result.innerHTML=`<strong>Skor latihan: ${benar}/${latihanData.pg.length}</strong>${details.join('')}`;
-result.classList.add('show');
-result.scrollIntoView({behavior:'smooth',block:'start'});
-$('latihanCheck').disabled=true;
-renderKaTeX(result);
+  let benar=0;const details=[];
+  latihanData.pg.forEach((x,i)=>{const chosen=document.querySelector(`input[name="lat${i}"]:checked`);const ok=chosen && Number(chosen.value)===x.a;if(ok)benar++;details.push(`<p><strong>Soal ${i+1}: ${ok?'Benar':'Belum tepat'}.</strong> ${x.e}</p>`);});
+  const result=$('latihanResult');result.innerHTML=`<strong>Skor: ${benar}/${latihanData.pg.length}</strong>${details.join('')}`;result.classList.add('show');result.scrollIntoView({behavior:'smooth'});$('latihanCheck').disabled=true;renderKaTeX(result);
 };
-/* ================= KUIS — REVISI PECAHAN VERTIKAL + FOTO URAIAN ================= */
 
-/*
-CATATAN FORMAT:
-- Field `answer` (match & drag) = PLAIN TEXT (dipakai di <select> / dicocokkan).
-- Field `choices` (drag) = LaTeX untuk display vertikal.
-- Field `choicesPlain` = plain text untuk data-val (cadangan).
-- Field `term` / `q` / `pembahasan` = pakai \\( ... \\) dengan \\dfrac untuk vertikal.
-- FITUR BARU: foto uraian (base64) disimpan di jawaban.fotoUraian[soalIdx] = [b64_1, b64_2].
-*/
-
+/* KUIS */
 const kuisData={
 match:[
-{konteks:'Dua keping uang logam dilempar secara bersamaan. Jodohkan kejadian berikut dengan banyak anggota kejadian yang sesuai.',pasangan:[{term:'Muncul dua sisi angka',answer:'1'},{term:'Muncul satu sisi angka dan satu sisi gambar',answer:'2'},{term:'Muncul paling sedikit satu sisi gambar',answer:'3'}],pembahasan:'\\( n(S) = 2 \\times 2 = 4 \\), yaitu AA, AG, GA, GG. Muncul dua sisi angka = 1 (AA). Muncul satu angka satu gambar = 2 (AG, GA). Muncul paling sedikit satu gambar = 3 (AG, GA, GG).'},
-{konteks:'Sebuah dadu dilempar satu kali. Jodohkan kejadian berikut dengan peluangnya.',pasangan:[{term:'Muncul mata dadu angka 5',answer:'1/6'},{term:'Muncul mata dadu kurang dari 4',answer:'1/2'},{term:'Muncul mata dadu paling banyak 6',answer:'1'}],pembahasan:'\\( n(S) = 6 \\). Muncul angka 5 = 1 hasil, \\( P = \\dfrac{1}{6} \\). Kurang dari 4 = {1,2,3} \\( \\rightarrow 3 \\) hasil, \\( P = \\dfrac{3}{6} = \\dfrac{1}{2} \\). Paling banyak 6 = {1,2,3,4,5,6} \\( \\rightarrow 6 \\) hasil, \\( P = \\dfrac{6}{6} = 1 \\).'},
-{konteks:'Dua buah dadu dilempar secara bersamaan. Jodohkan kejadian berikut dengan peluang yang tepat.',pasangan:[{term:'Jumlah kedua mata dadu 7',answer:'1/6'},{term:'Jumlah munculnya mata dadu yang merupakan faktor dari bilangan 6 sekaligus bilangan prima',answer:'1/12'},{term:'Jumlah kedua mata dadu 2',answer:'1/36'}],pembahasan:'\\( n(S) = 36 \\). Jumlah 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) \\( \\rightarrow 6 \\) hasil, \\( P = \\dfrac{6}{36} = \\dfrac{1}{6} \\). Faktor 6 sekaligus prima = {2,3}, pasangan (1,6),(2,5),(3,4) \\( \\rightarrow 3 \\) hasil, \\( P = \\dfrac{3}{36} = \\dfrac{1}{12} \\). Jumlah 2: (1,1) \\( \\rightarrow 1 \\) hasil, \\( P = \\dfrac{1}{36} \\).'},
-{konteks:'Sebuah kantong berisi 6 manik-manik merah, 4 manik-manik kuning, dan 2 manik-manik biru. Dua manik-manik diambil satu per satu tanpa pengembalian. Jodohkan kejadian berikut dengan peluangnya.',pasangan:[{term:'Merah kemudian kuning',answer:'2/11'},{term:'Kuning kemudian biru',answer:'2/33'},{term:'Biru kemudian merah',answer:'1/11'}],pembahasan:'\\( n(S) = 12 \\). Merah lalu kuning: \\( \\dfrac{6}{12} \\times \\dfrac{4}{11} = \\dfrac{24}{132} = \\dfrac{2}{11} \\). Kuning lalu biru: \\( \\dfrac{4}{12} \\times \\dfrac{2}{11} = \\dfrac{8}{132} = \\dfrac{2}{33} \\). Biru lalu merah: \\( \\dfrac{2}{12} \\times \\dfrac{6}{11} = \\dfrac{12}{132} = \\dfrac{1}{11} \\).'},
-{konteks:'Dalam sebuah kotak terdapat 5 bola merah, 4 bola biru, dan 3 bola putih. Dua bola diambil sekaligus secara acak tanpa pengembalian. Jodohkan kejadian berikut dengan peluangnya.',pasangan:[{term:'Kedua bola berwarna merah',answer:'5/33'},{term:'Kedua bola berwarna biru',answer:'1/11'},{term:'Kedua bola berwarna putih',answer:'1/22'}],pembahasan:'\\( n(S) = C(12,2) = 66 \\). Dua merah: \\( C(5,2) = 10, P = \\dfrac{10}{66} = \\dfrac{5}{33} \\). Dua biru: \\( C(4,2) = 6, P = \\dfrac{6}{66} = \\dfrac{1}{11} \\). Dua putih: \\( C(3,2) = 3, P = \\dfrac{3}{66} = \\dfrac{1}{22} \\).'}
+{konteks:'Dua koin dilempar. Jodohkan kejadian!',pasangan:[{term:'Dua sisi angka',answer:'1'},{term:'Satu angka satu gambar',answer:'2'},{term:'Minimal satu gambar',answer:'3'}],pembahasan:'\\( n(S)=4 \\).'},
+{konteks:'Satu dadu dilempar. Jodohkan peluangnya!',pasangan:[{term:'Angka 5',answer:'1/6'},{term:'Kurang dari 4',answer:'1/2'},{term:'Maksimal 6',answer:'1'}],pembahasan:'\\( P=\\dfrac{n(A)}{n(S)} \\).'},
+{konteks:'Dua dadu dilempar. Jodohkan peluangnya!',pasangan:[{term:'Jumlah 7',answer:'1/6'},{term:'Jumlah faktor 6 & prima',answer:'1/12'},{term:'Jumlah 2',answer:'1/36'}],pembahasan:'\\( P=\\dfrac{n(A)}{36} \\).'},
+{konteks:'6 merah, 4 kuning, 2 biru. Diambil 2 tanpa pengembalian.',pasangan:[{term:'Merah lalu kuning',answer:'2/11'},{term:'Kuning lalu biru',answer:'2/33'},{term:'Biru lalu merah',answer:'1/11'}],pembahasan:'\\( P=\\dfrac{a}{b}\\times\\dfrac{c}{d} \\).'},
+{konteks:'5 merah, 4 biru, 3 putih. Diambil 2 sekaligus.',pasangan:[{term:'Kedua merah',answer:'5/33'},{term:'Kedua biru',answer:'1/11'},{term:'Kedua putih',answer:'1/22'}],pembahasan:'\\( P=\\dfrac{C(n,k)}{C(N,K)} \\).'}
 ],
 drag:[
-{q:'Sebuah dadu bersisi enam dilempar sebanyak satu kali. Peluang munculnya mata dadu berupa bilangan genap adalah ....',choices:['\\( \\dfrac{1}{6} \\)','\\( \\dfrac{1}{3} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{2}{3} \\)'],choicesPlain:['1/6','1/3','1/2','2/3'],answer:'\\( \\dfrac{1}{2} \\)',answerPlain:'1/2',pembahasan:'\\( n(S) = 6 \\). Bilangan genap: 2, 4, 6 \\( \\rightarrow n(A) = 3 \\). \\( P = \\dfrac{3}{6} = \\dfrac{1}{2} \\).'},
-{q:'Dalam sebuah kotak terdapat 5 bola merah, 3 bola biru, dan 2 bola hijau. Jika satu bola diambil secara acak, peluang terambilnya bola biru adalah ....',choices:['\\( \\dfrac{1}{5} \\)','\\( \\dfrac{3}{10} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{2}{5} \\)'],choicesPlain:['1/5','3/10','1/2','2/5'],answer:'\\( \\dfrac{3}{10} \\)',answerPlain:'3/10',pembahasan:'\\( n(S) = 5 + 3 + 2 = 10 \\). Bola biru = 3. \\( P = \\dfrac{3}{10} \\).'},
-{q:'Dalam sebuah kotak terdapat 6 bola merah dan 4 bola putih. Dua bola diambil satu per satu secara acak dengan pengembalian. Peluang terambil bola merah pada pengambilan pertama dan bola putih pada pengambilan kedua adalah ....',choices:['\\( \\dfrac{1}{5} \\)','\\( \\dfrac{6}{25} \\)','\\( \\dfrac{2}{5} \\)','\\( \\dfrac{3}{5} \\)'],choicesPlain:['1/5','6/25','2/5','3/5'],answer:'\\( \\dfrac{6}{25} \\)',answerPlain:'6/25',pembahasan:'Dengan pengembalian, peluang tetap. \\( P(\\text{merah}) = \\dfrac{6}{10} \\), \\( P(\\text{putih}) = \\dfrac{4}{10} \\). \\( P = \\dfrac{6}{10} \\times \\dfrac{4}{10} = \\dfrac{24}{100} = \\dfrac{6}{25} \\).'},
-{q:'Dalam sebuah kotak terdapat 5 bola merah dan 3 bola biru. Dua bola diambil secara berurutan tanpa pengembalian. Peluang kedua bola yang terambil berwarna merah adalah ....',choices:['\\( \\dfrac{5}{14} \\)','\\( \\dfrac{5}{16} \\)','\\( \\dfrac{3}{8} \\)','\\( \\dfrac{1}{2} \\)'],choicesPlain:['5/14','5/16','3/8','1/2'],answer:'\\( \\dfrac{5}{14} \\)',answerPlain:'5/14',pembahasan:'\\( P(\\text{merah 1}) = \\dfrac{5}{8} \\). Setelah diambil, sisa 4 merah dari 7 bola. \\( P(\\text{merah 2}|\\text{merah 1}) = \\dfrac{4}{7} \\). \\( P = \\dfrac{5}{8} \\times \\dfrac{4}{7} = \\dfrac{20}{56} = \\dfrac{5}{14} \\).'},
-{q:'Dalam sebuah kotak terdapat 8 baterai dalam kondisi baik dan 4 baterai rusak. Dua baterai diambil secara berurutan tanpa pengembalian. Peluang kedua baterai yang terambil dalam kondisi baik adalah ....',choices:['\\( \\dfrac{7}{22} \\)','\\( \\dfrac{14}{33} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{8}{11} \\)'],choicesPlain:['7/22','14/33','1/2','8/11'],answer:'\\( \\dfrac{14}{33} \\)',answerPlain:'14/33',pembahasan:'\\( P(\\text{baik 1}) = \\dfrac{8}{12} \\). Setelah diambil, sisa 7 baik dari 11. \\( P(\\text{baik 2}|\\text{baik 1}) = \\dfrac{7}{11} \\). \\( P = \\dfrac{8}{12} \\times \\dfrac{7}{11} = \\dfrac{56}{132} = \\dfrac{14}{33} \\).'}
+{q:'Dadu dilempar. Peluang muncul genap?',choices:['\\( \\dfrac{1}{6} \\)','\\( \\dfrac{1}{3} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{2}{3} \\)'],choicesPlain:['1/6','1/3','1/2','2/3'],answer:'\\( \\dfrac{1}{2} \\)',answerPlain:'1/2',pembahasan:'Genap = 2,4,6. \\( P=\\dfrac{3}{6}=\\dfrac{1}{2} \\).'},
+{q:'5 merah, 3 biru, 2 hijau. Peluang biru?',choices:['\\( \\dfrac{1}{5} \\)','\\( \\dfrac{3}{10} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{2}{5} \\)'],choicesPlain:['1/5','3/10','1/2','2/5'],answer:'\\( \\dfrac{3}{10} \\)',answerPlain:'3/10',pembahasan:'\\( P=\\dfrac{3}{10} \\).'},
+{q:'6 merah, 4 putih. Diambil dengan pengembalian. Peluang merah lalu putih?',choices:['\\( \\dfrac{1}{5} \\)','\\( \\dfrac{6}{25} \\)','\\( \\dfrac{2}{5} \\)','\\( \\dfrac{3}{5} \\)'],choicesPlain:['1/5','6/25','2/5','3/5'],answer:'\\( \\dfrac{6}{25} \\)',answerPlain:'6/25',pembahasan:'\\( P=\\dfrac{6}{10}\\times\\dfrac{4}{10}=\\dfrac{6}{25} \\).'},
+{q:'5 merah, 3 biru. Diambil 2 tanpa pengembalian. Peluang merah-merah?',choices:['\\( \\dfrac{5}{14} \\)','\\( \\dfrac{5}{16} \\)','\\( \\dfrac{3}{8} \\)','\\( \\dfrac{1}{2} \\)'],choicesPlain:['5/14','5/16','3/8','1/2'],answer:'\\( \\dfrac{5}{14} \\)',answerPlain:'5/14',pembahasan:'\\( P=\\dfrac{5}{8}\\times\\dfrac{4}{7}=\\dfrac{5}{14} \\).'},
+{q:'8 baik, 4 rusak. Diambil 2 tanpa pengembalian. Peluang baik-baik?',choices:['\\( \\dfrac{7}{22} \\)','\\( \\dfrac{14}{33} \\)','\\( \\dfrac{1}{2} \\)','\\( \\dfrac{8}{11} \\)'],choicesPlain:['7/22','14/33','1/2','8/11'],answer:'\\( \\dfrac{14}{33} \\)',answerPlain:'14/33',pembahasan:'\\( P=\\dfrac{8}{12}\\times\\dfrac{7}{11}=\\dfrac{14}{33} \\).'}
 ],
 uraian:[
-{q:'Dua dadu dilempar bersama-sama sebanyak 126 kali. Frekuensi harapan muncul dua mata dadu berjumlah kurang dari 6 adalah ... kali.',a:'\\( n(S)=36 \\). Jumlah \\( < 6 \\): (1,1),(1,2),(2,1),(1,3),(2,2),(3,1),(1,4),(2,3),(3,2),(4,1) \\( \\rightarrow 10 \\). \\( P=\\dfrac{10}{36}=\\dfrac{5}{18} \\). \\( F_h=\\dfrac{5}{18}\\times 126=35 \\) kali.'},
-{q:'Sebuah kotak berisi 25 kelereng merah, 40 kelereng putih, dan 35 kelereng hijau. Kemudian, diambil sebuah kelereng dari kotak tersebut. Peluang terambil bukan kelereng hijau adalah ....',a:'\\( n(S)=25+40+35=100 \\). Hijau=35. Bukan hijau=100-35=65. \\( P=\\dfrac{65}{100}=\\dfrac{13}{20} \\).'},
-{q:'Dari 5 siswa laki-laki dan 6 siswa perempuan akan dibentuk sebuah tim yang terdiri atas 3 siswa. Peluang terbentuk tim yang terdiri atas 1 siswa laki-laki dan 2 siswa perempuan adalah ....',a:'\\( n(S)=C(11,3)=165 \\). \\( C(5,1)=5, C(6,2)=15 \\). \\( n(A)=5\\times 15=75 \\). \\( P=\\dfrac{75}{165}=\\dfrac{5}{11} \\).'},
-{q:'Kardus I berisi 5 bolpoin merah dan 7 bolpoin biru. Kardus II berisi 4 bolpoin merah dan 10 bolpoin biru. Dari kedua kardus tersebut akan diambil masing-masing 1 bolpoin secara acak. Peluang terambil bolpoin merah dari kardus 1 dan bolpoin biru dari kardus II adalah ....',a:'\\( P(M_1)=\\dfrac{5}{12} \\). \\( P(B_2)=\\dfrac{10}{14} \\). \\( P=\\dfrac{5}{12}\\times\\dfrac{10}{14}=\\dfrac{50}{168}=\\dfrac{25}{84} \\).'},
-{q:'Sebuah kotak berisi 20 bola biru, 12 bola kuning, dan 8 bola hitam. Fadil mengambil sebuah bola dari kotak tersebut dan tidak dikembalikan. Kemudian, Dahlan dan Gani juga ikut mengambil bola secara bergantian dan juga tidak dikembalikan. Peluang bola yang terambil secara berurutan warna biru, kuning, dan hitam adalah ....',a:'\\( P(B)=\\dfrac{20}{40} \\). \\( P(K|B)=\\dfrac{12}{39} \\). \\( P(H|B\\cap K)=\\dfrac{8}{38} \\). \\( P=\\dfrac{20}{40}\\times\\dfrac{12}{39}\\times\\dfrac{8}{38}=\\dfrac{8}{247} \\).'}
-]
-};
+{q:'Dua dadu dilempar 126 kali. Frekuensi harapan jumlah < 6?',a:'\\( n(S)=36 \\). Jumlah < 6 ada 10. \\( P=\\dfrac{10}{36} \\). \\( F_h=\\dfrac{10}{36}\\times 126=35 \\).'},
+{q:'25 merah, 40 putih, 35 hijau. Peluang bukan hijau?',a:'\\( n(S)=100 \\). Bukan hijau=65. \\( P=\\dfrac{65}{100}=\\dfrac{13}{20} \\).'},
+{q:'5 laki-laki, 6 perempuan. Dibentuk tim 3 orang. Peluang 1 L & 2 P?',a:'\\( C(11,3)=165 \\). \\( 5\\times 15=75 \\). \\( P=\\dfrac{75}{165}=\\dfrac{5}{11} \\).'},
+{q:'Kardus I (5M,7B), Kardus II (4M,10B). Peluang M dari I & B dari II?',a:'\\( P=\\dfrac{5}{12}\\times\\dfrac{10}{14}=\\dfrac{25}{84} \\).'},
+{q:'20 biru, 12 kuning, 8 hitam. Diambil 3 tanpa pengembalian. Peluang biru, kuning, hitam?',a:'\\( P=\\dfrac{20}{40}\\times\\dfrac{12}{39}\\times\\dfrac{8}{38}=\\dfrac{8}{247} \\).'}
+]};
 
 const BOBOT={match:20,drag:20,uraian:60};
 const KUIS_DURASI_MENIT=45;
-
-/* ===== KONFIG FOTO URAIAN ===== */
-const FOTO_MAX=2;                 // maks 2 foto per soal
-const FOTO_MAX_BYTES=180*1024;    // 180KB base64 per foto (aman dari limit 1MB)
-const FOTO_MAX_DIM=600;           // resize maks 600px
-const FOTO_QUALITY=0.45;          // kompresi JPEG
+const FOTO_MAX=2;
+const FOTO_MAX_BYTES=180*1024;
+const FOTO_MAX_DIM=600;
+const FOTO_QUALITY=0.45;
 
 let kuisState=null;
 let kuisTimer=null;
 let kuisWaktuSisa=0;
 let monitorUnsubscribe=null;
 
-function getPredikat(nilai){
-if(nilai>=90) return {label:'A',kelas:'a'};
-if(nilai>=80) return {label:'B',kelas:'b'};
-if(nilai>=70) return {label:'C',kelas:'c'};
-if(nilai>=60) return {label:'D',kelas:'d'};
-return {label:'E',kelas:'e'};
-}
-
-function shuffle(arr){
-const a=[...arr];
-for(let i=a.length-1;i>0;i--){
-const j=Math.floor(Math.random()*(i+1));
-[a[i],a[j]]=[a[j],a[i]];
-}
-return a;
-}
+function getPredikat(nilai){if(nilai>=90)return{label:'A',kelas:'a'};if(nilai>=80)return{label:'B',kelas:'b'};if(nilai>=70)return{label:'C',kelas:'c'};if(nilai>=60)return{label:'D',kelas:'d'};return{label:'E',kelas:'e'};}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function hitungSkorSementara(){
-let benarMatch=0,benarDrag=0;
-kuisData.match.forEach((m,i)=>{
-const jm=(kuisState&&kuisState.jawaban.match[i])||{};
-m.pasangan.forEach((p,pi)=>{
-if(jm[pi]===p.answer) benarMatch++;
-});
-});
-kuisData.drag.forEach((d,i)=>{
-if(kuisState && kuisState.jawaban.drag[i]===d.answer) benarDrag++;
-});
-const totalPasang=kuisData.match.reduce((s,m)=>s+m.pasangan.length,0);
-const totalKotak=kuisData.drag.length;
-const skorMatch=(benarMatch/totalPasang)*BOBOT.match;
-const skorDrag=(benarDrag/totalKotak)*BOBOT.drag;
-return {benarMatch,benarDrag,totalPasang,totalKotak,skorMatch,skorDrag};
+  let benarMatch=0,benarDrag=0;
+  kuisData.match.forEach((m,i)=>{const jm=(kuisState&&kuisState.jawaban.match[i])||{};m.pasangan.forEach((p,pi)=>{if(jm[pi]===p.answer)benarMatch++;});});
+  kuisData.drag.forEach((d,i)=>{if(kuisState && kuisState.jawaban.drag[i]===d.answer)benarDrag++;});
+  const totalPasang=kuisData.match.reduce((s,m)=>s+m.pasangan.length,0);
+  const totalKotak=kuisData.drag.length;
+  const skorMatch=(benarMatch/totalPasang)*BOBOT.match;
+  const skorDrag=(benarDrag/totalKotak)*BOBOT.drag;
+  return {benarMatch,benarDrag,totalPasang,totalKotak,skorMatch,skorDrag};
 }
 
-function mulaiTimer(){
-mulaiTimerDenganSisa(KUIS_DURASI_MENIT*60);
-}
+function mulaiTimer(){mulaiTimerDenganSisa(KUIS_DURASI_MENIT*60);}
+function mulaiTimerDenganSisa(detik){hentikanTimer();kuisWaktuSisa=detik;updateTimerDisplay();kuisTimer=setInterval(()=>{kuisWaktuSisa--;updateTimerDisplay();if(kuisWaktuSisa<=0){hentikanTimer();alert('⏰ Waktu habis! Kuis otomatis dikumpulkan.');kumpulkanKuis(true);}},1000);}
+function hentikanTimer(){if(kuisTimer){clearInterval(kuisTimer);kuisTimer=null;}}
+function updateTimerDisplay(){const el=document.getElementById('kuisTimer');if(!el)return;const m=Math.floor(kuisWaktuSisa/60);const s=kuisWaktuSisa%60;el.textContent=`⏰ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;el.classList.remove('warning','danger');if(kuisWaktuSisa<=60)el.classList.add('danger');else if(kuisWaktuSisa<=300)el.classList.add('warning');}
+function hentikanMonitor(){if(monitorUnsubscribe){monitorUnsubscribe();monitorUnsubscribe=null;}}
 
-function mulaiTimerDenganSisa(detik){
-hentikanTimer();
-kuisWaktuSisa=detik;
-updateTimerDisplay();
-kuisTimer=setInterval(()=>{
-kuisWaktuSisa--;
-updateTimerDisplay();
-if(kuisWaktuSisa<=0){
-hentikanTimer();
-alert('⏰ Waktu habis! Kuis otomatis dikumpulkan.');
-kumpulkanKuis(true);
-}
-},1000);
-}
-
-function hentikanTimer(){
-if(kuisTimer){
-clearInterval(kuisTimer);
-kuisTimer=null;
-}
-}
-
-function updateTimerDisplay(){
-const el=document.getElementById('kuisTimer');
-if(!el) return;
-const m=Math.floor(kuisWaktuSisa/60);
-const s=kuisWaktuSisa%60;
-el.textContent=`⏰ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-el.classList.remove('warning','danger');
-if(kuisWaktuSisa<=60) el.classList.add('danger');
-else if(kuisWaktuSisa<=300) el.classList.add('warning');
-}
-
-function hentikanMonitor(){
-if(monitorUnsubscribe){
-monitorUnsubscribe();
-monitorUnsubscribe=null;
-}
-}
-
-/* ===== FOTO URAIAN: helper ===== */
 function getFotoUraian(idx){
 if(!kuisState || !kuisState.jawaban.fotoUraian) return [];
 const v=kuisState.jawaban.fotoUraian[idx];
@@ -976,12 +627,10 @@ window.uploadFotoUraian=async(event,idx)=>{
 const files=[...event.target.files];
 if(!files.length)return;
 if(!kuisState.jawaban.fotoUraian) kuisState.jawaban.fotoUraian={};
-
 let arr=getFotoUraian(idx);
 const sisa=FOTO_MAX-arr.length;
 if(sisa<=0){alert(`Maksimal ${FOTO_MAX} foto per soal. Hapus dulu yang lama.`);event.target.value='';return;}
 if(files.length>sisa) alert(`Hanya ${sisa} foto bisa ditambahkan (maks ${FOTO_MAX}).`);
-
 const baru=files.slice(0,sisa);
 for(const f of baru){
 if(!f.type.startsWith('image/')){alert(`${f.name} bukan gambar.`);continue;}
@@ -1048,17 +697,14 @@ console.error('Gagal simpan live:',e);
 
 window.renderKuisMenu=async()=>{
 const section=$('studentSection');
-
 let prevDoc=null;
 try{
 const docId=`${student.kode}_${student.nama.replace(/\s+/g,'_')}`;
 const d=await getDoc(doc(db,'progres_soal',docId));
 if(d.exists()) prevDoc=d.data();
 }catch(e){}
-
 let statusHTML='';
 let nilaiTertinggiHTML='';
-
 let feedbackData=null;
 try{
 const fbs=await getDocs(query(collection(db,'feedback_soal'),where('studentNama','==',student.nama),where('studentKode','==',student.kode)));
@@ -1081,15 +727,10 @@ const kandidat=[];
 if(prevDoc && (prevDoc.uraianDinilai===true || (prevDoc.skorUraian!==undefined && prevDoc.skorUraian!==null && prevDoc.skorUraian>0))){
 kandidat.push(prevDoc.skorTotal||0);
 }
-const rs=await getDocs(query(
-collection(db,'riwayat_soal'),
-where('studentNama','==',student.nama),
-where('studentKode','==',student.kode)
-));
+const rs=await getDocs(query(collection(db,'riwayat_soal'),where('studentNama','==',student.nama),where('studentKode','==',student.kode)));
 const riwayat=rs.docs.map(d=>d.data());
 const sudahDinilai=riwayat.filter(r=>r.uraianDinilai===true || (r.skorUraian!==undefined && r.skorUraian!==null && r.skorUraian>0));
 sudahDinilai.forEach(r=>kandidat.push(r.skorTotal!=null ? r.skorTotal : (r.skor||0)));
-
 if(kandidat.length){
 nilaiTertinggi=Math.max(...kandidat);
 percobaanTertinggi=kandidat.length;
@@ -1101,9 +742,8 @@ nilaiTertinggiHTML=`<div class="kuis-summary" style="background:#e8f4ff;border-l
 ${nilaiTertinggi!==null 
   ? `<div class="kuis-score" style="color:#3976d3">${Math.round(nilaiTertinggi)}/100</div>
      <span class="kuis-predikat ${getPredikat(nilaiTertinggi).kelas}">Predikat ${getPredikat(nilaiTertinggi).label}</span>
-     <p style="margin-top:8px;font-size:12px;color:#4a3f6b">Diambil dari ${percobaanTertinggi} percobaan yang uraiannya sudah dinilai guru.</p>`
-  : `<p style="margin-top:8px;font-size:13px;color:#946b08"><em>⏳ Belum ada percobaan yang uraiannya dinilai guru.</em></p>
-     <p style="font-size:12px;color:#8984a5">Nilai tertinggi akan muncul setelah guru menilai uraianmu.</p>`}
+     <p style="margin-top:8px;font-size:12px;color:#4a3f6b">Diambil dari ${percobaanTertinggi} percobaan.</p>`
+  : `<p style="margin-top:8px;font-size:13px;color:#946b08"><em>⏳ Belum ada percobaan yang uraiannya dinilai guru.</em></p>`}
 </div>`;
 
 let keteranganKMK='';
@@ -1116,7 +756,7 @@ keteranganKMK=`<div class="kuis-summary" style="background:#fff0f2;border-left:5
 </div>`;
 }else{
 keteranganKMK=`<div class="kuis-summary" style="background:#e2f8ee;border-left:5px solid #23866b;color:#166534">
-<strong style="color:#166534;font-size:15px">🎉 Selamat! Untuk mendapatkan nilai lebih bagus, kamu boleh mengerjakan ulang.</strong>
+<strong style="color:#166534;font-size:15px">🎉 Selamat! Kamu boleh mengerjakan ulang untuk nilai lebih baik.</strong>
 <p style="margin-top:8px;font-size:13px">Nilai tertinggi: <strong>${Math.round(nilaiUntukKKM)}/100</strong> · KKM: <strong>75</strong></p>
 </div>`;
 }
@@ -1124,7 +764,6 @@ keteranganKMK=`<div class="kuis-summary" style="background:#e2f8ee;border-left:5
 keteranganKMK=`<div class="kuis-summary" style="background:#fff3d7;border-left:5px solid #e7ad35;color:#946b08">
 <strong style="color:#946b08;font-size:15px">⏳ Tunggu nilai uraian dan feedback dari guru!</strong>
 <p style="margin-top:8px;font-size:13px">Skor otomatis (Match + Drag): <strong>${Math.round((prevDoc.skorMatch||0)+(prevDoc.skorDrag||0))}/40</strong></p>
-<p style="font-size:13px">Uraian: <em>${uraianDinilai ? Math.round(prevDoc.skorUraian)+'/60' : 'Menunggu penilaian guru'}</em></p>
 </div>`;
 }
 
@@ -1142,7 +781,6 @@ ${keteranganKMK}
 statusHTML=`<div class="kuis-summary">
 <strong>Kamu sedang mengerjakan kuis.</strong>
 <p>Soal ${Math.min((prevDoc.currentIndex||0)+1,prevDoc.totalSoal||15)} dari ${prevDoc.totalSoal||15}</p>
-<p>Klik "Lanjutkan Kuis" untuk meneruskan.</p>
 </div>`;
 }
 
@@ -1154,12 +792,12 @@ feedbackHTML=`<div class="feedback-panel"><strong>💬 Feedback dari guru:</stro
 
 section.innerHTML=`<div class="practice-area">
 <h3>Kuis Peluang</h3>
-<p class="muted">Kuis terdiri dari 5 soal menjodohkan, 5 soal drag, dan 5 soal uraian. Total 15 soal. Kuis dinilai. Waktu: ${KUIS_DURASI_MENIT} menit untuk seluruh kuis.</p>
+<p class="muted">Kuis terdiri dari 5 soal menjodohkan, 5 soal drag, dan 5 soal uraian. Waktu: ${KUIS_DURASI_MENIT} menit.</p>
 ${statusHTML}
 ${feedbackHTML}
 <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
 ${prevDoc && prevDoc.selesaiKuis 
-  ? `<button class="practice-btn" onclick="mulaiKuis()">🔄 Ulangi Kuis (nilai tertinggi diambil)</button>
+  ? `<button class="practice-btn" onclick="mulaiKuis()">🔄 Ulangi Kuis</button>
      <button class="practice-btn secondary" onclick="reviewKuisTerakhir()">📝 Review Jawaban</button>
      <button class="practice-btn secondary" onclick="reviewRiwayatMurid()">📜 Riwayat Nilai</button>`
   : prevDoc && prevDoc.currentIndex!==undefined
@@ -1175,7 +813,7 @@ window.reviewKuisTerakhir=async()=>{
 try{
 const docId=`${student.kode}_${student.nama.replace(/\s+/g,'_')}`;
 const d=await getDoc(doc(db,'progres_soal',docId));
-if(!d.exists()){alert('Belum ada data kuis.');return;}
+if(!d.exists()){alert('Belum ada data.');return;}
 const data=d.data();
 kuisState={
 jawaban:data.jawabanKuis||{uraian:{},match:{},drag:{},fotoUraian:{}},
@@ -1187,28 +825,19 @@ await reviewKuis();
 
 window.reviewRiwayatMurid=async()=>{
 const section=$('studentSection');
-section.innerHTML='<div class="practice-area"><h3>📜 Riwayat Nilai Kuis</h3><div class="empty">Memuat riwayat...</div></div>';
-
+section.innerHTML='<div class="practice-area"><h3>📜 Riwayat Nilai</h3><div class="empty">Memuat...</div></div>';
 const nilaiRiwayat = r => (r.skorTotal!=null ? r.skorTotal : (r.skor||0));
 const sudahDinilai = r => r.uraianDinilai===true || (r.skorUraian!==undefined && r.skorUraian!==null && r.skorUraian>0);
-
 try{
-const rs=await getDocs(query(
-collection(db,'riwayat_soal'),
-where('studentNama','==',student.nama),
-where('studentKode','==',student.kode)
-));
+const rs=await getDocs(query(collection(db,'riwayat_soal'),where('studentNama','==',student.nama),where('studentKode','==',student.kode)));
 let riwayat=rs.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
 const ta=a.at?.toDate?a.at.toDate().getTime():0;
 const tb=b.at?.toDate?b.at.toDate().getTime():0;
 return tb-ta;
 });
-
 let html='<div class="practice-area"><h3>📜 Riwayat Nilai Kuis</h3>';
-html+='<p class="muted">Semua percobaan kuis yang pernah kamu kerjakan. Nilai tertinggi (yang uraiannya sudah dinilai guru) yang dipakai.</p>';
-
 if(!riwayat.length){
-html+='<div class="empty">Belum ada riwayat percobaan. Kerjakan kuis dulu ya.</div>';
+html+='<div class="empty">Belum ada riwayat percobaan.</div>';
 }else{
 const dinilai=riwayat.filter(sudahDinilai);
 const tertinggi=dinilai.length?Math.max(...dinilai.map(nilaiRiwayat)):null;
@@ -1222,7 +851,7 @@ html+=`<div class="riwayat-item" style="${isTertinggi?'border:2px solid #23866b;
 <strong>Percobaan ${riwayat.length-i}${isTertinggi?' 🏆 Tertinggi':''}</strong>
 <span>${tgl}</span>
 </div>
-<div class="riwayat-score" style="${isTertinggi?'color:#23866b':''}">Skor: ${Math.round(nilai)}/100 ${graded?'':'<em style="color:#946b08;font-size:12px">(sementara — uraian belum dinilai)</em>'}</div>
+<div class="riwayat-score" style="${isTertinggi?'color:#23866b':''}">Skor: ${Math.round(nilai)}/100 ${graded?'':'<em style="color:#946b08;font-size:12px">(sementara)</em>'}</div>
 <p style="font-size:12px;margin-top:6px">Match: ${Math.round(r.skorMatch||0)}/20 · Drag: ${Math.round(r.skorDrag||0)}/20 · Uraian: ${graded ? Math.round(r.skorUraian||0)+'/60' : '<em style="color:#946b08">⏳ belum dinilai</em>'}</p>
 </div>`;
 });
@@ -1231,7 +860,7 @@ html+='<button class="practice-btn" onclick="studentTab(\'kuis\')">← Kembali k
 section.innerHTML=html;
 renderKaTeX(section);
 }catch(e){
-section.innerHTML=`<div class="practice-area"><h3>📜 Riwayat Nilai Kuis</h3><div class="empty">Gagal memuat: ${esc(errText(e))}</div><button class="practice-btn" onclick="studentTab('kuis')">← Kembali ke Kuis</button></div>`;
+section.innerHTML=`<div class="practice-area"><h3>📜 Riwayat Nilai</h3><div class="empty">Gagal memuat: ${esc(errText(e))}</div><button class="practice-btn" onclick="studentTab('kuis')">← Kembali</button></div>`;
 renderKaTeX(section);
 }
 };
@@ -1350,7 +979,7 @@ bodyHTML=konteksHTML+pasanganHTML;
 const pairs=kuisState.dragChoicesShuffled[s.idx];
 const val=kuisState.jawaban.drag[s.idx]||'';
 bodyHTML=`<h4>${esc(s.q)}</h4>
-<p class="muted" style="font-size:12px;margin:8px 0">💡 <strong>Seret</strong> pilihan ke kotak di bawah (drag & drop). Klik tidak berfungsi.</p>
+<p class="muted" style="font-size:12px;margin:8px 0">💡 <strong>Seret</strong> pilihan ke kotak di bawah.</p>
 <div class="kuis-drag-items" id="dragItems">
 ${pairs.map(p=>`<div class="kuis-drag-item ${val===p.latex?'selected':''}" data-val="${esc(p.latex)}" data-plain="${esc(p.plain)}" draggable="true" ondragstart="mulaiDragKuis(event,this)">${p.latex}</div>`).join('')}
 </div>
@@ -1368,12 +997,12 @@ ${fotoArr.map((f,fi)=>`
 </div>`).join('')}
 </div>`:'';
 bodyHTML=`<h4>${esc(s.q)}</h4>
-<textarea class="kuis-input" id="kuisInput" placeholder="Tuliskan jawaban dan langkah penyelesaian...">${esc(val)}</textarea>
+<textarea class="kuis-input" id="kuisInput" placeholder="Tuliskan jawaban...">${esc(val)}</textarea>
 <div style="margin-top:12px;padding:12px;background:#f0e7ff;border-radius:12px;border:1px dashed #c4aef0">
 <p style="font-size:12px;font-weight:800;color:#6e49bd;margin-bottom:8px">📷 Lampirkan foto jawaban (opsional, maks ${FOTO_MAX} foto)</p>
 <input type="file" id="fotoInput" accept="image/*" multiple style="font-size:12px;width:100%" onchange="uploadFotoUraian(event,${s.idx})">
 <div id="fotoPreviewWrap" style="margin-top:10px">${fotoPreview}</div>
-<p class="muted" style="font-size:11px;margin-top:6px">💡 Jawab dengan teks ATAU foto (salah satu cukup). Foto dikompres otomatis.</p>
+<p class="muted" style="font-size:11px;margin-top:6px">💡 Jawab dengan teks ATAU foto.</p>
 </div>`;
 }
 
@@ -1394,7 +1023,6 @@ ${bodyHTML}
 <button class="practice-btn secondary" onclick="kuisPrev()" ${kuisState.index===0?'disabled':''}>← Sebelumnya</button>
 <button class="practice-btn" onclick="kuisNext()" id="kuisNextBtn">${kuisState.index===total-1?'Kumpulkan Kuis':'Berikutnya →'}</button>
 </div>
-<p class="muted" style="margin-top:12px;font-size:12px">Jawaban tersimpan otomatis. Waktu total 45 menit untuk seluruh kuis.</p>
 </div>`;
 renderKaTeX(section);
 
@@ -1415,21 +1043,16 @@ kuisState.jawaban.uraian[s.idx]=e.target.value;
 }else if(s.jenis==='drag'){
 setupTouchDrag();
 }
-
 updateTimerDisplay();
 }
 
-/* ===== DRAG & DROP MURNI ===== */
-
 let draggedItem=null;
-
 window.mulaiDragKuis=(event,el)=>{
 draggedItem=el;
 el.classList.add('dragging');
 event.dataTransfer.setData('text/plain',el.dataset.val);
 event.dataTransfer.effectAllowed='move';
 };
-
 window.jatuhkanDragKuis=(event,zone)=>{
 event.preventDefault();
 zone.classList.remove('dragover');
@@ -1441,7 +1064,6 @@ draggedItem.classList.remove('dragging');
 draggedItem=null;
 renderKuisSoal();
 };
-
 window.kosongkanDropKuis=()=>{
 const s=kuisState.soal[kuisState.index];
 kuisState.jawaban.drag[s.idx]='';
@@ -1452,10 +1074,8 @@ function setupTouchDrag(){
 const items=document.querySelectorAll('.kuis-drag-item');
 const zone=document.getElementById('kuisDropZone');
 if(!zone) return;
-
 let touchItem=null;
 let touchGhost=null;
-
 items.forEach(item=>{
 item.addEventListener('touchstart',(e)=>{
 touchItem=item;
@@ -1472,7 +1092,6 @@ touchGhost.style.zIndex='9999';
 touchGhost.style.transform='scale(1.1)';
 document.body.appendChild(touchGhost);
 },{passive:true});
-
 item.addEventListener('touchmove',(e)=>{
 if(!touchItem) return;
 e.preventDefault();
@@ -1489,7 +1108,6 @@ zone.classList.add('dragover');
 zone.classList.remove('dragover');
 }
 },{passive:false});
-
 item.addEventListener('touchend',(e)=>{
 if(!touchItem) return;
 const touch=e.changedTouches[0];
@@ -1544,8 +1162,8 @@ return so.pasangan.every((p,pi)=>!!jm[pi]);
 }
 if(so.jenis==='drag') return !!kuisState.jawaban.drag[so.idx];
 });
-if(!semuaLengkap){alert('Masih ada soal yang belum dijawab. Periksa kembali dengan tombol Sebelumnya.');return;}
-if(!confirm('Kumpulkan kuis? Setelah dikumpulkan, jawaban tidak bisa diubah.')) return;
+if(!semuaLengkap){alert('Masih ada soal yang belum dijawab.');return;}
+if(!confirm('Kumpulkan kuis?')) return;
 await kumpulkanKuis(false);
 }else{
 kuisState.index++;
@@ -1569,10 +1187,8 @@ if(!ownerUid){
 const cd=await getDoc(doc(db,'classes',student.id));
 if(cd.exists()) ownerUid=cd.data().ownerUid;
 }
-
 const oldDoc=await getDoc(doc(db,'progres_soal',docId));
 const oldData=oldDoc.exists()?oldDoc.data():null;
-
 let finalSkorMatch=s.skorMatch;
 let finalSkorDrag=s.skorDrag;
 let finalSkorUraian=skorUraian;
@@ -1580,7 +1196,6 @@ let finalSkorTotal=skorTotal;
 let finalBenarMatch=s.benarMatch;
 let finalBenarDrag=s.benarDrag;
 let finalJawaban=kuisState.jawaban;
-
 if(oldData && oldData.selesaiKuis && (oldData.skorTotal||0) > skorTotal){
 finalSkorMatch=oldData.skorMatch||0;
 finalSkorDrag=oldData.skorDrag||0;
@@ -1590,7 +1205,6 @@ finalBenarMatch=oldData.benarMatch||0;
 finalBenarDrag=oldData.benarDrag||0;
 finalJawaban=oldData.jawabanKuis||kuisState.jawaban;
 }
-
 await setDoc(doc(db,'progres_soal',docId),{
 studentNama:student.nama,
 studentKode:student.kode,
@@ -1638,9 +1252,9 @@ return;
 }
 
 if(otomatis){
-alert('⏰ Waktu habis! Kuis otomatis dikumpulkan. Skor bisa dilihat di menu Kuis.');
+alert('⏰ Waktu habis! Kuis otomatis dikumpulkan.');
 }else{
-alert('✅ Kuis berhasil dikumpulkan! Skor bisa dilihat di menu Kuis.');
+alert('✅ Kuis berhasil dikumpulkan!');
 }
 kuisState=null;
 renderStudent();
@@ -1668,7 +1282,7 @@ kuisState.skorUraianPerSoal=progressData.skorUraianPerSoal;
 
 let html='<div class="practice-area"><h3>📝 Review Jawaban Kuis</h3>';
 if(feedbackSudah){
-html+='<div class="feedback-panel" style="margin-bottom:14px"><strong>✅ Guru sudah memberi feedback.</strong> Pembahasan lengkap ditampilkan di bawah.</div>';
+html+='<div class="feedback-panel" style="margin-bottom:14px"><strong>✅ Guru sudah memberi feedback.</strong> Pembahasan lengkap ditampilkan.</div>';
 }else{
 html+='<p class="muted">Pembahasan lengkap akan muncul setelah guru memberi feedback.</p>';
 }
@@ -1723,13 +1337,12 @@ html+=`<div class="detail-item empty"><strong>Soal ${i+1}:</strong> ${esc(u.q)}<
 }
 });
 html+='</div>';
-
 html+='<button class="practice-btn" onclick="studentTab(\'kuis\')">Kembali ke Kuis</button></div>';
 section.innerHTML=html;
 renderKaTeX(section);
 };
-  /* ================= MONITORING GURU (REAL-TIME) ================= */
 
+/* ================= MONITORING GURU (REAL-TIME) ================= */
 const TEMPLATE_FB={
 pujian:'Kerja bagus, [nama]! Kamu sudah memahami materi peluang dengan baik. Pertahankan! 🎉',
 motivasi:'Semangat, [nama]! Sedikit lagi. Perhatikan soal yang salah, baca pembahasannya, lalu coba lagi. 💪',
@@ -1742,7 +1355,7 @@ hentikanMonitor();
 $('content').innerHTML=`
 <section class="panel">
 <h2>📊 Monitoring Kuis <span style="font-size:12px;color:#23866b;font-weight:700">● Live</span></h2>
-<p class="muted">Pantau progres kuis murid secara real-time — update otomatis tanpa refresh.</p>
+<p class="muted">Pantau progres kuis murid secara real-time.</p>
 <div id="kelasSelectWrap"></div>
 <div id="monitorContent"></div>
 </section>`;
@@ -1839,7 +1452,6 @@ const progresText=p.selesaiKuis
     ? `📖 Soal ${Math.min(ci+1,ts)} dari ${ts}`
     : '—');
 
-// Cek apakah ada foto uraian
 const fotoUraian=p.jawabanKuis && p.jawabanKuis.fotoUraian;
 let adaFoto=false;
 if(fotoUraian){
@@ -1865,7 +1477,7 @@ return `<tr>
 el.innerHTML=ringkasan+`
 <div class="bulk-bar">
 <strong>Feedback massal:</strong>
-<span style="color:#8984a5">Centang beberapa murid, lalu pilih template:</span>
+<span style="color:#8984a5">Centang beberapa murid:</span>
 <button onclick="feedbackMassal('pujian')">🎉 Pujian</button>
 <button onclick="feedbackMassal('motivasi')">💪 Motivasi</button>
 <button onclick="feedbackMassal('saran')">📚 Saran</button>
@@ -1907,7 +1519,6 @@ return tb-ta;
 
 const jawaban=p.jawabanKuis||{};
 
-/* ===== URAIAN: TAMPILKAN TEKS + FOTO ===== */
 const uraianHTML=kuisData.uraian.map((u,i)=>{
 const ans=jawaban.uraian && jawaban.uraian[i] ? esc(jawaban.uraian[i]) : '(belum dijawab)';
 const fotoData=jawaban.fotoUraian && jawaban.fotoUraian[i];
@@ -2003,7 +1614,6 @@ modal.querySelector('#closeDetail').addEventListener('click',()=>modal.remove())
 modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
 }
 
-/* ===== FUNGSI: Nilai Uraian per Percobaan (dari Riwayat) — LIHAT FOTO ===== */
 window.bukaNilaiUraianRiwayat=async(riwayatId,nama,kode)=>{
 try{
 const rd=await getDoc(doc(db,'riwayat_soal',riwayatId));
