@@ -797,7 +797,7 @@ async function simpanProgresLive(isMulai=false){
     console.error('Gagal simpan live:',e);
   }
 }
-  window.renderKuisMenu=async()=>{
+window.renderKuisMenu=async()=>{
 const section=$('studentSection');
 let prevDoc=null;
 try{
@@ -985,7 +985,7 @@ matchOptionsShuffled:{},
 dragChoicesShuffled:{}
 };
 soal.filter(s=>s.jenis==='match').forEach(s=>{
-const jawabanSoal=s.pasangan.map(p=>p.answer);
+const jawabanSoal=s.pasangan.map(p=>p.answerPlain);
 kuisState.matchOptionsShuffled[s.idx]=shuffle(jawabanSoal);
 });
 soal.filter(s=>s.jenis==='drag').forEach(s=>{
@@ -1013,7 +1013,7 @@ dragChoicesShuffled:{}
 };
 if(!kuisState.jawaban.fotoUraian) kuisState.jawaban.fotoUraian={};
 soal.filter(s=>s.jenis==='match').forEach(s=>{
-const jawabanSoal=s.pasangan.map(p=>p.answer);
+const jawabanSoal=s.pasangan.map(p=>p.answerPlain);
 kuisState.matchOptionsShuffled[s.idx]=shuffle(jawabanSoal);
 });
 soal.filter(s=>s.jenis==='drag').forEach(s=>{
@@ -1037,25 +1037,6 @@ mulaiTimerDenganSisa(sisaDetik);
 }catch(e){alert(errText(e));}
 };
 
-function updateMatchOptions(idx){
-const jm=kuisState.jawaban.match[idx]||{};
-const selects=document.querySelectorAll('.match-select');
-const chosenValues=new Set(Object.values(jm).filter(v=>v));
-selects.forEach(sel=>{
-const currentVal=sel.value;
-sel.querySelectorAll('option').forEach(opt=>{
-if(!opt.value) return;
-if(opt.value===currentVal){
-opt.disabled=false;
-}else if(chosenValues.has(opt.value)){
-opt.disabled=true;
-}else{
-opt.disabled=false;
-}
-});
-});
-}
-
 function renderKuisSoal(){
 const s=kuisState.soal[kuisState.index];
 const total=kuisState.soal.length;
@@ -1077,13 +1058,16 @@ ${val?'<button class="practice-btn secondary" style="font-size:12px;padding:6px 
 const opts=kuisState.matchOptionsShuffled[s.idx];
 const konteksHTML=`<p style="font-size:13px;color:#6845ae;background:#f0e7ff;padding:10px 14px;border-radius:10px;margin-bottom:14px;line-height:1.6">${esc(s.konteks)}</p>`;
 const pasanganHTML=s.pasangan.map((p,pi)=>{
-const val=kuisState.jawaban.match[s.idx] && kuisState.jawaban.match[s.idx][pi] ? kuisState.jawaban.match[s.idx][pi] : '';
+const currentPlain=(kuisState.jawaban.match[s.idx] && kuisState.jawaban.match[s.idx][pi]) ? kuisState.jawaban.match[s.idx][pi] : '';
 return `<div class="kuis-match-row">
 <strong>${esc(p.term)}</strong>
-<select class="match-select" data-pi="${pi}">
-<option value="">— Pilih —</option>
-${opts.map(o=>`<option value="${esc(o)}" ${val===o?'selected':''}>${esc(o)}</option>`).join('')}
-</select>
+<div class="match-options-wrap" data-pi="${pi}" style="display:flex;flex-wrap:wrap;gap:6px">
+${opts.map(optPlain=>{
+const optLatex=(s.pasangan.find(pp=>pp.answerPlain===optPlain)||{}).answer || optPlain;
+const sel=(currentPlain===optPlain);
+return `<button type="button" class="match-opt-btn ${sel?'selected':''}" data-pi="${pi}" data-plain="${esc(optPlain)}" onclick="pilihMatchOption(${s.idx},${pi},'${esc(optPlain)}',this)">${optLatex}</button>`;
+}).join('')}
+</div>
 </div>`;
 }).join('');
 bodyHTML=konteksHTML+pasanganHTML;
@@ -1128,17 +1112,7 @@ ${bodyHTML}
 </div>`;
 renderKaTeX(section);
 
-if(s.jenis==='match'){
-document.querySelectorAll('.match-select').forEach(sel=>{
-sel.addEventListener('change',(e)=>{
-const pi=Number(e.target.dataset.pi);
-if(!kuisState.jawaban.match[s.idx]) kuisState.jawaban.match[s.idx]={};
-kuisState.jawaban.match[s.idx][pi]=e.target.value;
-updateMatchOptions(s.idx);
-});
-});
-updateMatchOptions(s.idx);
-}else if(s.jenis==='uraian'){
+if(s.jenis==='uraian'){
 $('kuisInput').addEventListener('input',(e)=>{
 kuisState.jawaban.uraian[s.idx]=e.target.value;
 });
@@ -1147,6 +1121,14 @@ setupTouchDrag();
 }
 updateTimerDisplay();
 }
+
+window.pilihMatchOption=(soalIdx,pi,plain,btn)=>{
+  if(!kuisState.jawaban.match[soalIdx]) kuisState.jawaban.match[soalIdx]={};
+  kuisState.jawaban.match[soalIdx][pi]=plain;
+  const wrap=btn.closest('.match-options-wrap');
+  wrap.querySelectorAll('.match-opt-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+};
 
 let draggedItem=null;
 window.mulaiDragKuis=(event,el)=>{
@@ -1273,7 +1255,7 @@ renderKuisSoal();
 await simpanProgresLive();
 }
 };
-  async function kumpulkanKuis(otomatis=false){
+async function kumpulkanKuis(otomatis=false){
 hentikanTimer();
 const s=hitungSkorSementara();
 const skorUraian=0;
